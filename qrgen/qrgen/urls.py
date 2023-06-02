@@ -24,9 +24,10 @@ from userpages.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", show_main, name = "main"),
-    path("auth/", show_auth, name = "auth"),
+    path("auth/", show_auth, name = "login"),
     path("reg/", show_reg, name = "reg"),
     path("editor/", show_editor, name = "editor"),
     path("profile/", show_profile, name="profile"),
-    path("all_qr/",show_all_qr ,name="all-qr")
+    path("all_qr/",show_all_qr ,name="all-qr"),
+    path("payment/", show_pay, name = "payment")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,12 @@
 {% extends "base/base.html" %}
 
 {% block content %}
+
+{% for qr in  qr_codes %}
+
+<p>{{ qr.url }}</p>
+<p>{{ qr.img }}</p>
   
+{% endfor %}
+
 {% endblock %}

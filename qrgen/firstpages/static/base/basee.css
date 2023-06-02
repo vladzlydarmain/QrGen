@@ -64,7 +64,6 @@ header{
     padding: 10px 50px;
     gap: 40px;
 
-    width: 1181px;
     height: 657px;
 
     background: rgba(0, 20, 51, 0.15);
@@ -73,4 +72,3 @@ header{
 
     border-radius: 30px;
 }
-

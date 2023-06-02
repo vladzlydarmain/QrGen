@@ -5,9 +5,16 @@
     {% csrf_token %}
     <div class="container">
         <h1> Log in </h1>
-        <input type="text" placeholder="Email" name="email">
+        <input type="text" placeholder="Username" name="name">
         <input type="text" placeholder="Password" name="password">
-        <button> Log in </button>
+        <div class="submit">
+            <button class="log-in"> Log in </button> <button class="dont-have">Don`t have account yet</button>
+        </div>
+
+        
     </div>
 </form>
+<div class="error_div">
+    <h2 class="error_text">{{ error_text }}</h2>
+</div>
 {% endblock %}

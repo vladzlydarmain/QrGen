@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+<link rel="stylesheet" href="{% static 'userpages/pay.css' %}">
+{% block content %}
+<div class="payment-div">
+    <div class="Paiment-text">
+        <p>Payment details</p>
+    </div>
+    <div class="payment-inputs-div">
+        <label for=".name">Name:</label>
+        <input class="name pay-input" type="text" value="name" placeholder="">
+
+        <label for=".card-number">Card number:</label>
+        <input class="card-number pay-input" type="text" placeholder="">
+
+        <label for=".CVV">CVV:</label>
+        <input class="CVV pay-input" type="text" placeholder="">
+
+        <label for=".valid-till">Valid till:</label>
+        <input class="valid-till pay-input" type="text" placeholder="">
+
+        <button class="submit">Submit</button>
+    </div>
+</div>
+{% endblock %}
