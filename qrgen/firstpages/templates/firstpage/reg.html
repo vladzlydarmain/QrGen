@@ -4,14 +4,17 @@
 <form action="" method="POST">
     {% csrf_token %}
     <div class="container">
-        <h1> Registration </h1>
-        <input type="text" placeholder="Name" name="name">
-        <input type="text" placeholder="Email" name="email">
-        <input type="text" placeholder="Password" name="password">
-        <button> Sign Up </button>
+        <h1 class="reg-label"> Registration </h1>
+        <input class="reg-input" type="text" placeholder="Name" name="name">
+        <input class="reg-input" type="text" placeholder="Email" name="email">
+        <input class="reg-input" type="text" placeholder="Password" name="password">
+        <input class="reg-input" type="text" placeholder="Confirm password" name="password">
+        <div class="submit">
+            <button class="sign-up"> Sign Up </button>
+            <a href="{% url 'login' %}" class="have">Already have an account</a>
+        </div>
     </div>
 </form>
-<span>{{ error_text }}</span>
-
+<h2 class="error_text">{{ error_text }}</h2>
 
 {% endblock %}

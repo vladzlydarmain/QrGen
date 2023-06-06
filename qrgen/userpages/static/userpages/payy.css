@@ -1,0 +1,94 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.payment-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    padding: 20px 40px;
+    gap: 43px;
+    background: rgba(0, 20, 51, 0.15);
+    backdrop-filter: blur(10px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 50px;
+}
+.payment-inputs-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px;
+    gap: 10px;
+}
+
+.payment-inputs-div p{
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 45px;
+    color: #3381FF;
+    margin-bottom: 50px;
+}
+
+.input-pay{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+.pay-input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 23px 17px 23px;
+    gap: 10px;
+    width: 559px;
+    height: 70px;
+    font-family: 'Koh Santepheap';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    color: #FF9C66;
+    background: rgba(51, 129, 255, 0.4);
+    border-radius: 30px;
+    border: none;
+}
+
+.input-pay label{
+    height: 46px;
+    font-family: 'Koh Santepheap';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 46px;
+    color: #FF9C66;
+}
+
+.submit{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 244px;
+    height: 63px;
+    background: #002766;
+    border: none;
+    border-radius: 30px;
+    /* article 36 bold */
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 45px;
+    color: #FFFFFF;
+}

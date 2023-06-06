@@ -1,0 +1,9 @@
+.block-choose-div{
+    background-color: aliceblue;
+    border-radius: 30px;
+}
+
+.block-choose-div label{
+    font-size: large;
+    color: aqua;
+}

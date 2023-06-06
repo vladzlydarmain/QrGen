@@ -28,6 +28,6 @@ urlpatterns = [
     path("reg/", show_reg, name = "reg"),
     path("editor/", show_editor, name = "editor"),
     path("profile/", show_profile, name="profile"),
-    path("all_qr/",show_all_qr ,name="all-qr"),
+    path("all-qr/",show_all_qr ,name="all-qr"),
     path("payment/", show_pay, name = "payment")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

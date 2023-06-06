@@ -1,4 +1,44 @@
 {% extends "base/base.html" %}
 
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'editor/editore.css' %}">
+<script src="{% static 'js/script.js' %}" defer></script>
+<input id="url" value="{% url 'editor' %}" hidden>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="text" name="qr_url" placeholder="url">
+    <div>
+        <input type="color" name="back_color" id="back">
+
+        <input type="color" name="first_color" id="first">
+
+        <input type="color" name="second_color" id="second">
+    </div>
+
+    <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
+
+    <div>
+        <p>Choose the QRs block form</p>
+        <div class="block-choose-div">
+            <input type = "radio" class = "change_button" id="normal_block" name="block_form" value="SquareModuleDrawer()" checked>
+            <label for="#normal_block">normal</label>
+            <input type = "radio" class = "change_button" id="circle_block" name="block_form" value="CircleModuleDrawer()">
+            <label for="#circle_block">circle</label>
+            <input type = "radio" class = "change_button" id="gapped_block" name="block_form" value="GappedSquareModuleDrawer()">
+            <label for="#gapped_block">gapped</label>
+            <input type = "radio" class = "change_button" id="round_block" name="block_form" value="RoundedModuleDrawer()">
+            <label for="#round_block">round</label>
+            <input type = "radio" class = "change_button" id="vertical_block" name = "block_form" value="VerticalBarsDrawer()">
+            <label for="#vertical_block">vertical</label>
+            <input type = "radio" class = "change_button" id="horizontal_block" name = "block_form" value="HorizontalBarsDrawer()">
+            <label for="#horizontal">horizontal</label>
+        </div>
+    </div>
+    <img src="{{ url.image.url }}" alt="nu tip your qr" style="width: 300px; border-radius: 30px;">
+
+    <button class="create">Create</button>
+    <!-- <img src="image/templateqr.png" alt="QRcode"> -->
+
+</form>
 {% endblock %}

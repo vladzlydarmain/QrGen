@@ -1,18 +1,20 @@
 {% extends "base/base.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'firstpage/stylee.css' %}">
+<link rel="stylesheet" href="{% static 'firstpage/style.css' %}">
+<link rel="stylesheet" href="{% static 'base/base.css' %}">
 {% block content %}
     <div class="menu">
         <p></p>
-        <div class="plan">
+        <form action="" method="post" class="plan">
+            {% csrf_token %}
             <div class="upper">
                 <p class="type">Professional</p>
-                <p class="price">50,50$/month</p>
-                <button class="">GET IT</button>
+                <p class="price">{{ professional.price }}$</p>
+                <button value="Professional" name="plantype">GET IT</button>
             </div>
             <div class="lower">
                 <div class="dynamic">
-                    <div class="value">250</div>
+                    <div class="value">{{ professional.qrcode_amount }}</div>
                     <p>Dynamic QR Codes</p>
                 </div>
                 <div class="dynamic">
@@ -20,40 +22,42 @@
                     <p>Scans</p>
                 </div>
             </div>
-        </div>
-        <div class="plan">
+        </form>
+        <form action="" method="post" class="plan">
+            {% csrf_token %}
             <div class="upper">
                 <p class="type">Advanced</p>
-                <p class="price">25,50$/month</p>
-                <button class="">GET IT</button>
+                <p class="price">{{ advanced.price }}$</p>
+                <button value="Advanced" name="plantype">GET IT</button>
             </div>
             <div class="lower">
                 <div class="dynamic">
-                    <div class="value">75</div>
+                    <div class="value">{{ advanced.qrcode_amount }}</div>
                     <p>Dynamic QR Codes</p>
                 </div>
                 <div class="dynamic">
-                    <div class="value">20,000</div>
+                    <div class="value">{{ advanced.scans }}</div>
                     <p>Scans</p>
                 </div>
             </div>
-        </div>
-        <div class="plan">
+        </form>
+        <form action="" method="post" class="plan">
+            {% csrf_token %}
             <div class="upper">
                 <p class="type">Beginner</p>
-                <p class="price">10,50$/month</p>
-                <button class="">GET IT</button>
+                <p class="price">{{ beginner.price }}$</p>
+                <button value="Beginner" name="plantype">GET IT</button>
             </div>
             <div class="lower">
                 <div class="dynamic">
-                    <div class="value">2</div>
+                    <div class="value">{{ beginner.qrcode_amount }}</div>
                     <p>Dynamic QR Codes</p>
                 </div>
                 <div class="dynamic">
-                    <div class="value">5,000</div>
+                    <div class="value">{{ beginner.scans }}</div>
                     <p>Scans</p>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 {% endblock %}

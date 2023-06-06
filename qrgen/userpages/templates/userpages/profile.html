@@ -1,8 +1,43 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-<div>
-    <p>{{ user.name }}</p>
-    <p>{{ user.email }}</p>
+
+    <div>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'userpages/profile.css' %}">
+    <div class="profile-p1">
+        <div>
+            <p>{{ user.name }}</p>
+            <p>{{ user.email }}</p>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input class="l-out" type="text" name="button" value="log out" hidden>
+            <button class="log-out">Log out</button>
+        </form>
+    </div>
+
+    <div class="p-info">
+        <h1> Plan info </h1> 
+    </div>
+    
+    <div class="plan-info">
+        <div class="profile-p2">
+        <p> Plan level: {{ user.plan_info.plantype }}</p>
+        <p> Max count of Scans: {{ user.plan_info.scans }}</p>
+        <p> Max count of qr-codes: {{ user.plan_info.qrcode_amount }}</p>
+        <!-- <p> Next payment: </p> -->
+        </div>        
+        <form action="" method="post">
+            {% csrf_token %}
+            <input class="end-s" type="text" name="button" value="end subscribe" hidden>
+            <button class="end-subscribe">End up plan</button>
+        </form>
+    </div>
+
+
+
+
+    
 </div>
 {% endblock %}

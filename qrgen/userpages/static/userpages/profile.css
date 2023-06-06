@@ -1,0 +1,85 @@
+ .log-out{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+
+    width: 210px;
+    height: 62px;
+    background-color: #CC4700;
+}
+
+.plan-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 50px;
+    gap: 10px;
+    width: 1018px;
+    height: 347px;
+    background: #FFBD99;
+    border-radius: 30px;
+    color: #CC4700;
+    font-size: 32px;
+    line-height: 41px; 
+
+}
+
+.end-subscribe{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 334px;
+    height: 97px;
+    background: #002766;
+    border-radius: 30px;
+    font-size: 36px;
+    line-height: 45px;
+    color: white;
+}
+
+.profile-p1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    gap: 30px;
+    width: 1018px;
+    height: 139px;
+    background: #002766;
+    border-radius: 30px;
+    font-size: 32px;
+    line-height: 41px;
+    color: white;
+    font-style: normal;
+}
+
+.p-info{
+    font-size: 32px;
+    line-height: 40px;
+    color: #FF7A33;
+    padding: 10px;
+    padding-left: 414px;
+}
+
+.month{
+    font-size: small;
+}
+
+.profile-p2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 918px;
+    height: 132px;
+}
