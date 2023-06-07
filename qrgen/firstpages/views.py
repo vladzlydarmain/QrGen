@@ -8,16 +8,11 @@ from userpages.models import UserMod, Plan
 
 def show_main(request):
     context = {
-        "beginner":None,
-        "advanced": None,
-        "professional":None,
+        "plans":None
     }
 
     plans = Plan.objects.all()
-    context["beginner"] = plans.get(plantype="Beginner")
-    context["advanced"] = plans.get(plantype="Advanced")
-    context["professional"] = plans.get(plantype="Professional")
-
+    context["plans"] = plans
     if request.method == "POST":
         if request.user.is_authenticated:
             request.session["plantype"] = request.POST["plantype"]

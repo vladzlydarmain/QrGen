@@ -46,11 +46,21 @@ def show_pay(request):
         if request.user.is_authenticated:
             if "plantype" in request.session:
                 context["plan_info"] = Plan.objects.get(plantype=request.session["plantype"])
-                print(context["plan_info"])
+                # print(context["plan_info"])
             else:
                 return redirect("main")
         else:
             return redirect("login")
+    if request.method == "POST":
+        if "plantype" in request.POST:
+            user = request.user
+
+            plan = Plan.objects.get(plantype=request.POST["plantype"])
+            usser = UserMod.objects.get(user=User.objects.get(username=user))
+            usser.plan = plan
+            usser.save()
+            return redirect("profile")
+    
 
     response = render(request, "userpages/pay.html", context = context)
     return response

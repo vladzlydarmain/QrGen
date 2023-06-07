@@ -24,7 +24,12 @@
     <div class="plan-info">
         <div class="profile-p2">
         <p> Plan level: {{ user.plan_info.plantype }}</p>
-        <p> Max count of Scans: {{ user.plan_info.scans }}</p>
+        <p> Max count of Scans:
+            {% if user.plan_info.scans == -1.0 %}
+                ∞
+            {% else %}
+                {{ user.plan_info.scans }}
+            {% endif %} </p>
         <p> Max count of qr-codes: {{ user.plan_info.qrcode_amount }}</p>
         <!-- <p> Next payment: </p> -->
         </div>        

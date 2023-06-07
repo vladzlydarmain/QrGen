@@ -5,59 +5,34 @@
 {% block content %}
     <div class="menu">
         <p></p>
-        <form action="" method="post" class="plan">
-            {% csrf_token %}
-            <div class="upper">
-                <p class="type">Professional</p>
-                <p class="price">{{ professional.price }}$</p>
-                <button value="Professional" name="plantype">GET IT</button>
-            </div>
-            <div class="lower">
-                <div class="dynamic">
-                    <div class="value">{{ professional.qrcode_amount }}</div>
-                    <p>Dynamic QR Codes</p>
-                </div>
-                <div class="dynamic">
-                    <div class="value">∞</div>
-                    <p>Scans</p>
-                </div>
-            </div>
-        </form>
-        <form action="" method="post" class="plan">
-            {% csrf_token %}
-            <div class="upper">
-                <p class="type">Advanced</p>
-                <p class="price">{{ advanced.price }}$</p>
-                <button value="Advanced" name="plantype">GET IT</button>
-            </div>
-            <div class="lower">
-                <div class="dynamic">
-                    <div class="value">{{ advanced.qrcode_amount }}</div>
-                    <p>Dynamic QR Codes</p>
-                </div>
-                <div class="dynamic">
-                    <div class="value">{{ advanced.scans }}</div>
-                    <p>Scans</p>
-                </div>
-            </div>
-        </form>
-        <form action="" method="post" class="plan">
-            {% csrf_token %}
-            <div class="upper">
-                <p class="type">Beginner</p>
-                <p class="price">{{ beginner.price }}$</p>
-                <button value="Beginner" name="plantype">GET IT</button>
-            </div>
-            <div class="lower">
-                <div class="dynamic">
-                    <div class="value">{{ beginner.qrcode_amount }}</div>
-                    <p>Dynamic QR Codes</p>
-                </div>
-                <div class="dynamic">
-                    <div class="value">{{ beginner.scans }}</div>
-                    <p>Scans</p>
-                </div>
-            </div>
-        </form>
+        {% for plan in plans %}
+            {% if plan.price != 0.0 %}
+                <form action="" method="post" class="plan">
+                    {% csrf_token %}
+                    <div class="upper">
+                        <p class="type">{{ plan.plantype }}</p>
+                        <p class="price">{{ plan.price }}$</p>
+                        <button value="{{ plan.plantype }}" name="plantype">GET IT</button>
+                    </div>
+                    <div class="lower">
+                        <div class="dynamic">
+                            <div class="value">{{ plan.qrcode_amount }}</div>
+                            <p>Dynamic QR Codes</p>
+                        </div>
+                        <div class="dynamic">
+                            <div class="value">
+                                {% if plan.scans == -1.0 %}
+                                    ∞
+                                {% else %}
+                                    {{plan.scans}}
+                                {% endif %}
+                            </div>
+                            <p>Scans</p>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        {% endfor %}
+        
     </div>
 {% endblock %}

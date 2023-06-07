@@ -1,9 +1,27 @@
 .block-choose-div{
     background-color: aliceblue;
     border-radius: 30px;
+    padding: 10px;
 }
 
 .block-choose-div label{
     font-size: large;
     color: aqua;
+}
+
+.gradiant-choose-div{
+   background-color: rgb(46, 119, 161);
+   border-radius: 30px; 
+   padding: 10px;
+}
+
+.gradiant-choose-div label{
+    font-size: large;
+    color: coral;
+}
+
+.gradiant{
+    background-color: lightslategray;
+    border-radius: 30px;
+    padding: 10px;
 }

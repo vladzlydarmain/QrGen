@@ -5,40 +5,63 @@
 <link rel="stylesheet" href="{% static 'editor/editore.css' %}">
 <script src="{% static 'js/script.js' %}" defer></script>
 <input id="url" value="{% url 'editor' %}" hidden>
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="text" name="qr_url" placeholder="url">
-    <div>
-        <input type="color" name="back_color" id="back">
+<div class="generator">
+    <form action="{% url 'editor' %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input type="text" name = "buttontype" value="img" hidden>
+        <input type="text" name="qr_url" placeholder="url">
+        <div>
+            <input class="bg_color" type="color" name="back_color" id="back">
+            <label for="bg_color">Background color</label>
 
-        <input type="color" name="first_color" id="first">
+            <input type="color" name="first_color" id="first">
 
-        <input type="color" name="second_color" id="second">
-    </div>
-
-    <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
-
-    <div>
-        <p>Choose the QRs block form</p>
-        <div class="block-choose-div">
-            <input type = "radio" class = "change_button" id="normal_block" name="block_form" value="SquareModuleDrawer()" checked>
-            <label for="#normal_block">normal</label>
-            <input type = "radio" class = "change_button" id="circle_block" name="block_form" value="CircleModuleDrawer()">
-            <label for="#circle_block">circle</label>
-            <input type = "radio" class = "change_button" id="gapped_block" name="block_form" value="GappedSquareModuleDrawer()">
-            <label for="#gapped_block">gapped</label>
-            <input type = "radio" class = "change_button" id="round_block" name="block_form" value="RoundedModuleDrawer()">
-            <label for="#round_block">round</label>
-            <input type = "radio" class = "change_button" id="vertical_block" name = "block_form" value="VerticalBarsDrawer()">
-            <label for="#vertical_block">vertical</label>
-            <input type = "radio" class = "change_button" id="horizontal_block" name = "block_form" value="HorizontalBarsDrawer()">
-            <label for="#horizontal">horizontal</label>
+            <input type="color" name="second_color" id="second">
         </div>
-    </div>
-    <img src="{{ url.image.url }}" alt="nu tip your qr" style="width: 300px; border-radius: 30px;">
+        <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
+        <div >
+            <p>Choose the QRs block form</p>
+            <div class="block-choose-div">
+                <input type = "radio" class = "change_button" id="normal_block" name="block_form" value="SquareModuleDrawer()" checked>
+                <label for="#normal_block">normal</label>
+                <input type = "radio" class = "change_button" id="circle_block" name="block_form" value="CircleModuleDrawer()">
+                <label for="#circle_block">circle</label>
+                <input type = "radio" class = "change_button" id="gapped_block" name="block_form" value="GappedSquareModuleDrawer()">
+                <label for="#gapped_block">gapped</label>
+                <input type = "radio" class = "change_button" id="round_block" name="block_form" value="RoundedModuleDrawer()">
+                <label for="#round_block">round</label>
+                <input type = "radio" class = "change_button" id="vertical_block" name = "block_form" value="VerticalBarsDrawer()">
+                <label for="#vertical_block">vertical</label>
+                <input type = "radio" class = "change_button" id="horizontal_block" name = "block_form" value="HorizontalBarsDrawer()">
+                <label for="#horizontal">horizontal</label>
+            </div>
+            <p>Choose the QRs gradiant/p>
+            <div class="gradiant-choose-div">
+                <input type = "radio" class = "change_button" id="SolidFill" name="gradiant_form" value="SolidFillColorMask()" checked>
+                <label for="#SolidFill">No gradiant</label>
+                <input type = "radio" class = "change_button" id="RadialGradiant" name="gradiant_form" value="RadialGradiantColorMask()">
+                <label for="#RadialGradiant">Radial gradiant</label>
+                <input type = "radio" class = "change_button" id="SquareGradiant" name="gradiant_form" value="SquareGradiantColorMask()">
+                <label for="#SquareGradiant">Square gradiant</label>
+                <input type = "radio" class = "change_button" id="VerticalGradiant" name="gradiant_form" value="VerticalGradiantColorMask()">
+                <label for="#VerticalGradiant">Vertical gradiant</label>
+                <input type = "radio" class = "change_button" id="HorizontalGradiant" name="gradiant_form" value="HorizontalGradiantColorMask()">
+                <label for="#HorizontalGradiant">Horizontal gradiant</label>
+                <input type = "radio" class = "change_button" id="ImageGradiant" name="gradiant_form" value="ImageColorMask()">
+                <label for="#ImageGradiant">Image(doesn't work curently, sorry&#128542&#128542&#128542)</label>
+            </div>
+        </div>
+        <img src="{{ url.image.url }}" alt="nu tip your qr" style="width: 300px; border-radius: 30px;">
 
-    <button class="create">Create</button>
-    <!-- <img src="image/templateqr.png" alt="QRcode"> -->
+        <button class="create" type="submit">Create</button>
+        <!-- <img src="image/templateqr.png" alt="QRcode"> -->
 
-</form>
+    </form>
+    
+    <!-- <form action="{% url 'editor' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
+        <input type="submit" value="Upload">
+    </form> -->
+</div>
 {% endblock %}
