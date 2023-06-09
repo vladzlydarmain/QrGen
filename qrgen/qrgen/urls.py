@@ -29,5 +29,6 @@ urlpatterns = [
     path("editor/", show_editor, name = "editor"),
     path("profile/", show_profile, name="profile"),
     path("all-qr/",show_all_qr ,name="all-qr"),
-    path("payment/", show_pay, name = "payment")
+    path("payment/", show_pay, name = "payment"),
+    path("redirect/<qr_pk>",show_redirect_page, name = "redirect")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

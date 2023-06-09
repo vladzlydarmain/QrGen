@@ -1,11 +1,17 @@
 from qrgen.settings import MEDIA_URL
 from .generate_qr import *
 from userpages.models import *
+
 from django.shortcuts import render, redirect
-from .models import QrCode
+
+from .models import QrCode, UserImage, LittleImage
+
 from django.contrib.auth import authenticate
 from django.core.files.storage import FileSystemStorage
 import os
+
+import PIL
+from PIL import Image, ImageDraw
 
 def form_check(form):
     if form == "SquareModuleDrawer()":
@@ -34,8 +40,8 @@ def gradiant_check(gradiant, c1, c2, c3, image = None):
     if gradiant == "HorizontalGradiantColorMask()":
         gradiant = HorizontalGradiantColorMask(c1,c2,c3)
     if gradiant == "ImageColorMask()":
-        gradiant = ImageColorMask(image)
-        print("Написано же, что не работает, слепарик!")
+        gradiant = ImageColorMask(color_mask_image=image)
+        # print("Написано же, что не работает, слепарик!")
     return gradiant    
 
 
@@ -50,11 +56,7 @@ def show_editor(request):
     if request.method == "GET" and not request.user.is_authenticated:
         return redirect("login")
         
-    if request.method == "POST":
-        if "load_file" in request.FILES:
-            loaded = request.FILES["load_file"]
-            print(loaded)
-            
+    if request.method == "POST":    
 
         qr_var = request.POST
         back = qr_var["back_color"][1:]#tip uberau hashteg
@@ -62,21 +64,46 @@ def show_editor(request):
         second = qr_var["second_color"][1:]
         block_form = qr_var["block_form"]
         gradiant_form = qr_var["gradiant_form"]
-        # QrCode.addUser_img(image_file)
+        url = qr_var['qr_url']
+
         block_form = form_check(block_form)
         name = request.user
         user = UserMod.objects.get(user=User.objects.get(username=name))
-        print(qr_var)
-        url = qr_var['qr_url']
-        if not os.path.exists(MEDIA_URL+f"{name}"):
-            os.mkdir(MEDIA_URL+f"{name}")
+
+        
         b1 = hex_to_rgb(back)
         f1 = hex_to_rgb(first)
         s1 = hex_to_rgb(second)
-        gradiant_form = gradiant_check(gradiant_form,b1,f1,s1)  
-        new_qr = make_qr(qr_data = url, black_form=block_form, gradient = gradiant_form)
+
+        # print(qr_var)
+
+        if "load_file_little" in request.FILES:
+            little_qr_img = request.FILES["load_file_little"]
+            little_img = LittleImage(image_little = little_qr_img)
+            little_img.save(little_qr_img)
+            final_little_img = MEDIA_URL+f"media/{little_qr_img}"
+            print(final_little_img)
+        else:
+            final_little_img = None
+
+        if "load_file" in request.FILES:
+            in_qr_img = request.FILES["load_file"]
+            bg_img = UserImage(image_bg=in_qr_img)
+            bg_img.save(in_qr_img)
+            final_img = Image.open(MEDIA_URL+f"media/{in_qr_img}")
+            # print(in_qr_img)
+            gradiant_form = gradiant_check(gradiant_form,b1,f1,s1,final_img) 
+        else:
+            gradiant_form = gradiant_check(gradiant_form,b1,f1,s1)     
+
+        if not os.path.exists(MEDIA_URL+f"{name}"):
+            os.mkdir(MEDIA_URL+f"{name}")
+
+        final_qr = QrCode.addQr(user = user, url= url, qrcode_path = None)
+        new_qr = make_qr(qr_data = f"http://localhost:8000/redirect/{final_qr.pk}", image_center=final_little_img, black_form=block_form, gradient = gradiant_form)
         new_qr.save(MEDIA_URL+f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg")
-        final_qr = QrCode.addQr(user = user, url= url, qrcode_path = f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg")
+        final_qr.image = f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg"
+        final_qr.save()
         context["url"] = final_qr
 
     respones = render(request, "editor/editor.html", context)

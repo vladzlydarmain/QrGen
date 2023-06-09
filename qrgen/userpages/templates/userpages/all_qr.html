@@ -1,12 +1,22 @@
 {% extends "base/base.html" %}
 
+
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'userpages/all_qr.css' %}">
 
-{% for qr in  qr_codes %}
+<p class="qr-tipa">All your QR Codes</p>
+<div class="containeeer">
+    {% for qr in  qr_list %}
+    <div class="qr-div">
+        <img class="qr-img" src="{{ qr.image.url }}" alt="here must be picture">
+        <div class="qr-url-div">
+            <p class="qr-url">{{ qr.url }}</p>
+        </div>
+    </div>
+    
+    {% endfor %}
 
-<p>{{ qr.url }}</p>
-<p>{{ qr.img }}</p>
-  
-{% endfor %}
+</div>
 
 {% endblock %}

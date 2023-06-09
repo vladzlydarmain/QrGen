@@ -1,8 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-
-    <div>
+<div>
     {% load static %}
     <link rel="stylesheet" href="{% static 'userpages/profile.css' %}">
     <div class="profile-p1">
@@ -31,6 +30,7 @@
                 {{ user.plan_info.scans }}
             {% endif %} </p>
         <p> Max count of qr-codes: {{ user.plan_info.qrcode_amount }}</p>
+        <p> Last payment: {{ user.user_info.last_payment }}</p>
         <!-- <p> Next payment: </p> -->
         </div>        
         <form action="" method="post">

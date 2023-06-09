@@ -9,17 +9,23 @@
     <form action="{% url 'editor' %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         <input type="text" name = "buttontype" value="img" hidden>
-        <input type="text" name="qr_url" placeholder="url">
-        <div>
-            <input class="bg_color" type="color" name="back_color" id="back">
+        <input class="url-input" type="text" name="qr_url" placeholder="url">
+        <div class="colors">
+            <input class="bg_color" type="color" value="white" name="back_color" id="back">
             <label for="bg_color">Background color</label>
 
             <input type="color" name="first_color" id="first">
+            <label for=".first">First</label>
 
             <input type="color" name="second_color" id="second">
+            <label for=".second">Second</label>
         </div>
-        <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
-        <div >
+        <div class="load_image_div">
+            <input class="photo-url" name="load_file_little" type="file" accept=".jpeg, .jpg, .png">
+            <label for=".photo-url">center image</label>
+        </div>
+
+        <div class="type-qr">
             <p>Choose the QRs block form</p>
             <div class="block-choose-div">
                 <input type = "radio" class = "change_button" id="normal_block" name="block_form" value="SquareModuleDrawer()" checked>
@@ -35,7 +41,7 @@
                 <input type = "radio" class = "change_button" id="horizontal_block" name = "block_form" value="HorizontalBarsDrawer()">
                 <label for="#horizontal">horizontal</label>
             </div>
-            <p>Choose the QRs gradiant/p>
+            <p>Choose the QRs gradiant</p>
             <div class="gradiant-choose-div">
                 <input type = "radio" class = "change_button" id="SolidFill" name="gradiant_form" value="SolidFillColorMask()" checked>
                 <label for="#SolidFill">No gradiant</label>
@@ -47,11 +53,14 @@
                 <label for="#VerticalGradiant">Vertical gradiant</label>
                 <input type = "radio" class = "change_button" id="HorizontalGradiant" name="gradiant_form" value="HorizontalGradiantColorMask()">
                 <label for="#HorizontalGradiant">Horizontal gradiant</label>
-                <input type = "radio" class = "change_button" id="ImageGradiant" name="gradiant_form" value="ImageColorMask()">
-                <label for="#ImageGradiant">Image(doesn't work curently, sorry&#128542&#128542&#128542)</label>
+                <div class="div-with-image-gradiant">
+                    <input type = "radio" class = "change_button" id="ImageGradiant" name="gradiant_form" value="ImageColorMask()">
+                    <label for="#ImageGradiant">Image</label>
+                    <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
+                </div>
             </div>
         </div>
-        <img src="{{ url.image.url }}" alt="nu tip your qr" style="width: 300px; border-radius: 30px;">
+        <img src="{{ url.image.url }}" alt="" id='img-tag' style="width: 300px; border: none; border-radius: 30px;">
 
         <button class="create" type="submit">Create</button>
         <!-- <img src="image/templateqr.png" alt="QRcode"> -->
