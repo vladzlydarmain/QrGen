@@ -42,8 +42,6 @@ def show_reg(request):
             if "plantype" in request.session:
                 return redirect("payment")
             else:
-                UserMod.objects.create(user = User.objects.create_user(username = user_name, password = password, email = email), plan=Plan.objects.get(plantype="Free"))
-                user = authenticate(username = user_name, password = password)
                 return redirect("profile")
         except IntegrityError:
             context["error_text"] = "User already registered"

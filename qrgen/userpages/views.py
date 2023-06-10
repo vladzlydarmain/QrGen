@@ -21,7 +21,7 @@ def show_profile(request):
             name = request.user
             email = request.user.email
             userinfo = UserMod.objects.get(user=User.objects.get(username = name))
-            plan = UserMod.objects.get(user=User.objects.get(username = name)).plan
+            plan = userinfo.plan
             context["user"]["name"] = name
             context["user"]["email"] = email
             context["user"]["plan_info"] = plan
@@ -66,11 +66,11 @@ def show_pay(request):
             user = request.user
 
             plan = Plan.objects.get(plantype=request.POST["plantype"])
-            usser = UserMod.objects.get(user=User.objects.get(username=user))
-            usser.last_payment = str((datetime.datetime.now()).date())
-            usser.plan = plan
-            usser.qr_scans = 0
-            usser.save()
+            userobj = UserMod.objects.get(user=User.objects.get(username=user)) #берем обьект модифюзера по юзеру, которого берем по юзернейму
+            userobj.last_payment = str(datetime.date.today())
+            userobj.plan = plan
+            userobj.qr_scans = 0
+            userobj.save()
             return redirect("profile")
     
     response = render(request, "userpages/pay.html", context = context)
@@ -78,19 +78,19 @@ def show_pay(request):
 
 def show_redirect_page(request, qr_pk):
     qrobj = get_object_or_404(QrCode,pk = qr_pk)
-    user = UserMod.objects.get(user = qrobj.user.user)
+    user = qrobj.user
     userplan = user.plan
     user_last_payment = datetime.datetime.strptime(user.last_payment,'%Y-%m-%d')
     date = datetime.date.today()
     if (user_last_payment.month < date.month and date.day == user_last_payment.day and user_last_payment.year <= date.year) or (user_last_payment.month < date.month and date.day > user_last_payment.day) or (user_last_payment.year < date.year):
         return render(request, "userpages/redirect.html", context={
             "code":"Your payment was overdue"
-        })
+        })#проверка на просрочку даты
 
     if user.qr_scans >= userplan.scans and userplan.scans != -1:
         return render(request, "userpages/redirect.html", context={
             "code":"Your amount of scans have been exceeded, please buy new scans on our site"
-        })
+        })#проверка на просрочку сканов
     user.qr_scans += 1
     user.save()
     return redirect(qrobj.url)

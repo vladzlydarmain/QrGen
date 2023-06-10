@@ -2,6 +2,7 @@ from qrgen.settings import MEDIA_URL
 from .generate_qr import *
 from userpages.models import *
 
+from pathlib import *
 from django.shortcuts import render, redirect
 
 from .models import QrCode, UserImage, LittleImage
@@ -41,7 +42,6 @@ def gradiant_check(gradiant, c1, c2, c3, image = None):
         gradiant = HorizontalGradiantColorMask(c1,c2,c3)
     if gradiant == "ImageColorMask()":
         gradiant = ImageColorMask(color_mask_image=image)
-        # print("Написано же, что не работает, слепарик!")
     return gradiant    
 
 
@@ -101,10 +101,18 @@ def show_editor(request):
 
         final_qr = QrCode.addQr(user = user, url= url, qrcode_path = None)
         new_qr = make_qr(qr_data = f"http://localhost:8000/redirect/{final_qr.pk}", image_center=final_little_img, black_form=block_form, gradient = gradiant_form)
-        new_qr.save(MEDIA_URL+f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg")
-        final_qr.image = f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg"
+        qr_path = f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg"
+        new_qr.save(MEDIA_URL+qr_path)
+        final_qr.image = qr_path
         final_qr.save()
         context["url"] = final_qr
 
     respones = render(request, "editor/editor.html", context)
     return respones
+
+# def load_show(request):
+#     # file = 
+#     extension = pathlib.Path(model.image.name).suffix
+#     filename_with_extension = "{0}{1}".format(filename, extension)
+
+#     return FileResponse(model.image.open(), as_attachment=True, filename=filename_with_extension)
