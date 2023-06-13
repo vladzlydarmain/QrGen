@@ -10,6 +10,7 @@ body{
     align-items: center;
     background: no-repeat;
     background-image: url("images/background.jpg") ;
+    background-position: fixed;
     background-size: 100%;
     background-color: #24232b;
     width: 100%;
@@ -30,7 +31,6 @@ header{
     backdrop-filter: blur(5px);
 
 }
-
 
 .logo{
     display: flex;

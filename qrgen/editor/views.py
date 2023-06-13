@@ -1,18 +1,19 @@
-from qrgen.settings import MEDIA_URL
+from qrgen.settings import MEDIA_URL, BASE_DIR
 from .generate_qr import *
 from userpages.models import *
-
+# import mimetypes
 from pathlib import *
 from django.shortcuts import render, redirect
-
-from .models import QrCode, UserImage, LittleImage
-
+from django.http.response import HttpResponse
+from django.http import FileResponse
 from django.contrib.auth import authenticate
 from django.core.files.storage import FileSystemStorage
 import os
 
+from .models import QrCode, UserImage, LittleImage
 import PIL
 from PIL import Image, ImageDraw
+
 
 def form_check(form):
     if form == "SquareModuleDrawer()":
@@ -65,6 +66,7 @@ def show_editor(request):
         block_form = qr_var["block_form"]
         gradiant_form = qr_var["gradiant_form"]
         url = qr_var['qr_url']
+        extension = qr_var["extention"]
 
         block_form = form_check(block_form)
         name = request.user
@@ -82,7 +84,6 @@ def show_editor(request):
             little_img = LittleImage(image_little = little_qr_img)
             little_img.save(little_qr_img)
             final_little_img = MEDIA_URL+f"media/{little_qr_img}"
-            print(final_little_img)
         else:
             final_little_img = None
 
@@ -93,6 +94,7 @@ def show_editor(request):
             final_img = Image.open(MEDIA_URL+f"media/{in_qr_img}")
             # print(in_qr_img)
             gradiant_form = gradiant_check(gradiant_form,b1,f1,s1,final_img) 
+
         else:
             gradiant_form = gradiant_check(gradiant_form,b1,f1,s1)     
 
@@ -101,18 +103,20 @@ def show_editor(request):
 
         final_qr = QrCode.addQr(user = user, url= url, qrcode_path = None)
         new_qr = make_qr(qr_data = f"http://localhost:8000/redirect/{final_qr.pk}", image_center=final_little_img, black_form=block_form, gradient = gradiant_form)
-        qr_path = f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.jpg"
+        qr_path = f"{name}/generated_qr{len(QrCode.objects.filter(user = UserMod.objects.get(user = User.objects.get(username = name))))+1}.{extension}"
         new_qr.save(MEDIA_URL+qr_path)
         final_qr.image = qr_path
+        # if final_qr in 
         final_qr.save()
-        context["url"] = final_qr
 
+        if "load_file" in request.FILES:
+            bg_img.delete()
+        
+        if "load_file_little" in request.FILES:
+            little_img.delete()
+
+        context["url"] = final_qr
+        
     respones = render(request, "editor/editor.html", context)
     return respones
 
-# def load_show(request):
-#     # file = 
-#     extension = pathlib.Path(model.image.name).suffix
-#     filename_with_extension = "{0}{1}".format(filename, extension)
-
-#     return FileResponse(model.image.open(), as_attachment=True, filename=filename_with_extension)

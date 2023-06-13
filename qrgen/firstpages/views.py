@@ -34,6 +34,9 @@ def show_reg(request):
     if request.method == "POST" and not request.user.is_authenticated:
         user_name = request.POST.get("name")
         password = request.POST.get("password")
+        confirm_password = request.POST["confirm password"]
+        if password != confirm_password:
+            return redirect("reg")
         email = request.POST.get("email")
         try:
             UserMod.objects.create(user = User.objects.create_user(username = user_name, password = password, email = email), plan=Plan.objects.get(plantype="Free"))

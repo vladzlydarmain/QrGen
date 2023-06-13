@@ -9,13 +9,13 @@
     <form method="post">
         {% csrf_token %}
         <div class="payment-inputs-div">
-            <p class="payment-text" >Payment details</p>
+            <p class="payment-text" >Деталі оплати</p>
             <div class="input-pay">
-                <label for=".name">Name:</label>
+                <label for=".name">Ім'я:</label>
                 <input class="name pay-input" type="text" placeholder="Oleksyi Ostapchenko">
             </div>
             <div class="input-pay">
-                <label for=".card-number">Card number:</label>
+                <label for=".card-number">Номер картки:</label>
                 <input class="card-number pay-input" type="text" placeholder="1234 5678 9876 5432">
             </div>
             <div class="input-pay">
@@ -23,7 +23,7 @@
                 <input class="CVV pay-input" type="text" placeholder="123">
             </div>
             <div class="input-pay">
-                <label for=".valid-till">Valid till:</label>
+                <label for=".valid-till">Дійсна до:</label>
                 <input class="valid-till pay-input" type="text" placeholder="09/26">
             </div>
             <button name="plantype" value = "{{ plan_info.plantype }}" class="submit">Submit</button>
@@ -38,7 +38,7 @@
         <div class="lower">
             <div class="dynamic">
                 <div class="value">{{ plan_info.qrcode_amount }}</div>
-                <p>Dynamic QR Codes</p>
+                <p>Динамічні QR-коди</p>
             </div>
             <div class="dynamic">
                 <div class="value">
@@ -48,7 +48,7 @@
                         {{plan_info.scans}}
                     {% endif %}
                 </div>
-                <p>Scans</p>
+                <p>Кількість сканувань</p>
             </div>
         </div>
     </div>

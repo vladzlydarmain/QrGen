@@ -1,20 +1,38 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate
 from editor.models import QrCode
 from userpages.models import Plan, UserMod
 from django.shortcuts import get_object_or_404
 import datetime
 
+def check_code(request):
+    if 'code' in request.session:
+        return request.session["code"]
+    else:
+        return " "
+
 # Create your views here.
 def show_profile(request):
     context = {
-        "user":{"email":None, "name":None,"plan_info":None,"user_info":None}
+        "user":{"email":None, "name":None,"plan_info":None,"user_info":None},
+        "code":f"{check_code(request)}"
     }
     if request.method == "POST":
         if request.POST["button"] == "log out":
             logout(request)
             return redirect("login")
+        if request.POST["button"] == "endplan":
+            form = request.POST
+            user = UserMod.objects.get(user= User.objects.get(username=request.user))
+            if form["password"] == form["confirm password"] and authenticate(username = request.user, password = form["password"]) != None:
+                plan = Plan.objects.get(plantype="Free")
+                user.plan = plan
+                user.save()
+                request.session["code"] = ' '
+            else:
+                request.session["code"] = "Паролі не співпадають або пароль не вірний"
+            return redirect("profile")
 
     if request.method == "GET":
         if request.user.is_authenticated:

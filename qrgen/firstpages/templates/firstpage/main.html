@@ -12,12 +12,12 @@
                     <div class="upper">
                         <p class="type">{{ plan.plantype }}</p>
                         <p class="price">{{ plan.price }}$</p>
-                        <button value="{{ plan.plantype }}" name="plantype">GET IT</button>
+                        <button value="{{ plan.plantype }}" name="plantype">ОТРИМАТИ</button>
                     </div>
                     <div class="lower">
                         <div class="dynamic">
                             <div class="value">{{ plan.qrcode_amount }}</div>
-                            <p>Dynamic QR Codes</p>
+                            <p>Динамічні QR-коди</p>
                         </div>
                         <div class="dynamic">
                             <div class="value">
@@ -27,7 +27,7 @@
                                     {{plan.scans}}
                                 {% endif %}
                             </div>
-                            <p>Scans</p>
+                            <p>Кількість сканувань</p>
                         </div>
                     </div>
                 </form>

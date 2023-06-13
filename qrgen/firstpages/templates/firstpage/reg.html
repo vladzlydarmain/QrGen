@@ -4,14 +4,14 @@
 <form action="" method="POST">
     {% csrf_token %}
     <div class="container">
-        <h1 class="reg-label"> Registration </h1>
-        <input class="reg-input" type="text" placeholder="Name" name="name">
-        <input class="reg-input" type="text" placeholder="Email" name="email">
-        <input class="reg-input" type="text" placeholder="Password" name="password">
-        <input class="reg-input" type="text" placeholder="Confirm password" name="password">
+        <h1 class="reg-label"> Зареєструватись </h1>
+        <input class="reg-input" type="text" placeholder="Ім'я" name="name">
+        <input class="reg-input" type="text" placeholder="Електронна адреса" name="email">
+        <input class="reg-input" type="text" placeholder="Пароль" name="password">
+        <input class="reg-input" type="text" placeholder="Підтвердіть пароль" name="confirm password">
         <div class="submit">
-            <button class="sign-up"> Sign Up </button>
-            <a href="{% url 'login' %}" class="have">Already have an account</a>
+            <button class="sign-up"> Зареєструватись </button>
+            <a href="{% url 'login' %}" class="have">В мене вже є акаунт</a>
         </div>
     </div>
 </form>

@@ -1,4 +1,23 @@
- .log-out{
+
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+
+    margin-top: 100px;
+    background: rgba(0, 20, 51, 0.6);
+    backdrop-filter: blur(10px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 30px;
+
+}
+
+
+.log-out{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -14,12 +33,12 @@
 .plan-info{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 20px 50px;
+    padding: 10px 20px;
     gap: 10px;
-    width: 314px;
-    height: 359px;
+    width: 250px;
+    height: 250px;
     background: #FFBD99;
     border-radius: 30px;
     color: #CC4700;
@@ -29,21 +48,34 @@
     
 
 }
+.left{
+    /* border-radius: 30px 0px 0px 30px; */
+    height: 100%;
+    background-image: 100%;
+}
+.right{
 
+    height: 100%;
+    background-image: 100%;
+}
 .end-subscribe{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     gap: 10px;
-    width: 334px;
-    height: 97px;
+    height: 82px;
+    width: 160%;
+    justify-content: space-between;
+    /* padding: 0px 10px 0px 10px; */
+    font-family: 'Lexend';
+    font-style: normal;
     background: #002766;
-    border-radius: 30px;
+    border-radius: 20px;
+    font-weight: 700;
     font-size: 36px;
     line-height: 45px;
-    color: white;
+    color: #FF7A33;
     border: none;
 }
 
@@ -54,7 +86,7 @@
     align-items: center;
     padding: 10px 30px;
     gap: 30px;
-    width: 1018px;
+    width: 95%;
     height: 139px;
     background: #002766;
     border-radius: 30px;
@@ -65,11 +97,11 @@
 }
 
 .p-info{
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 15px;
+    line-height: 19x;
     color: #FF7A33;
     padding: 10px;
-    padding-left: 414px;
+    margin-right: 86%;
 }
 
 .month{
@@ -79,31 +111,25 @@
 .profile-p2{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
     padding: 10px;
     gap: 10px;
-    
-    width: 314px;
-    height: 359px;
 }
 
 .pl{
-    width: 89px;
     height: 45px;
     line-height: 45px;
     
 }
 
- .part3{
+.part3{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: flex-start;
+    align-items: center;
     padding: 10px;
-    gap: 10px;
-
-    width: 1031px;
-    height: 449px;
+    gap: 100px;
     
 }
 
@@ -111,10 +137,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 16px 10px;
     gap: 16px;
-    
-    width: 667px;
-    height: 429px;
+
 }
