@@ -1,0 +1,259 @@
+.block-choose-div{
+    background: rgb(102, 161, 255, 0.6);
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.generator{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 50px;
+    margin-top: 10px;
+    background: rgba(0, 20, 51, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    width: 70%;
+}
+
+.gen_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 39, 102, 0.6);
+    width: 100%;
+    padding: 25px 0px;
+}
+
+.gen_header p{
+    /* font-family: 'Lexend'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+
+    display: flex;
+    align-items: center;
+
+    color: #FF7A33;    
+}
+
+.gradiant-choose-div{
+    display: flex;
+    flex-direction: column;
+    background: rgba(51, 129, 255, 0.4);
+    border-radius: 30px; 
+    padding: 20px;
+    gap: 10px;
+    width: 70%;
+}
+
+.gradiant-choose-div p{
+    color: white;
+}
+
+.load_image_div{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+
+    background: rgba(51, 129, 255, 0.4);
+    width: 70%;
+    border-radius: 30px;
+}
+
+.load_image_div label{
+    color: white;
+}
+
+#gradiant-select{
+    font-size: large;
+    background-color: coral;
+    color: white;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+.grad_option:checked{
+    background-color: #0062FF;
+}
+
+.gradiant{
+    background-color: lightslategray;
+    border-radius: 30px;
+    padding: 10px;
+}
+.url-input{
+    font-size: 20px;
+    line-height: 25px;
+    padding: 20px;
+    width: calc(70% + 40px);
+    border-radius: 30px;
+    border: none;
+    color: #FFFFFF;
+    background: rgba(51, 129, 255, 0.4);
+}
+
+.url-input:focus{
+    background-color: rgba(61, 139, 255, 0.4);
+    border: none;
+}
+
+.url-input::-webkit-input-placeholder{
+    color: #ced0e6;
+}
+
+.colors{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    color: #FFFFFF;
+    font-size: 20px;
+
+
+}
+.photo-url{
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    background: rgb(255, 124, 53);
+    width: 70%;
+}
+.photo-url::-webkit-file-upload-button{
+    background-color: #0062FF;
+    border: none;
+}
+
+.type-qr p{
+    font-size: 20px;
+    color: #FFFFFF;
+    margin: 10px;
+    margin-top: 20px;
+
+}
+.create{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    gap: 10px;
+    background: none;
+    border: 4px #CC4700 solid;
+    border-radius: 30px;
+    font-size: 36px;
+    line-height: 45px;
+    color: white;
+    transition: ease-in-out 300ms;
+}
+.create:hover{
+    background: #993600;
+}
+.create:active{
+    border:4px #ffffff solid;
+}
+#img-tag{
+    width: 60%;
+}
+
+.create_form{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    gap: 20px;
+}
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 30px 0px;
+    gap: 30px;
+}
+
+.right-settings-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;    
+    background: rgba(51, 129, 255, 0.4);
+    border-radius: 27px;
+    width: 90%;
+}
+
+.right-settings-div p {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+
+    color: #ffffff;
+}
+
+.for-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+.change_img{
+    width: 45px;
+    border: 2px solid #0062FF;
+    border-radius: 15px;
+}
+
+.set_extension{
+    font-size: 20px;
+    line-height: 25px;
+    padding: 20px;
+    width: 70% ;
+    border-radius: 30px;
+    border: none;
+    color: #FFFFFF;
+    background: rgba(51, 129, 255, 0.4);
+}
+
+input[type="color"]{
+    background: #CC4700;
+    border-radius: 5px;
+}
+
+input[type="color"]:active{
+    background: #ff5b03;
+}
+
+
+.download-button{
+    background: none;
+    border: 4px #0062FF solid;
+    border-left: none;
+    border-radius: 0px 30px 30px 0px;
+    /* font-size: x-large; */
+}
+
+.download-button:hover{
+    background-color: #0243ac;
+}
+
+.text{
+    font-size: 23px;
+}

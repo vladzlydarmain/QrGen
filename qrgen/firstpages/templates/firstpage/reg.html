@@ -6,9 +6,9 @@
     <div class="container">
         <h1 class="reg-label"> Зареєструватись </h1>
         <input class="reg-input" type="text" placeholder="Ім'я" name="name">
-        <input class="reg-input" type="text" placeholder="Електронна адреса" name="email">
-        <input class="reg-input" type="text" placeholder="Пароль" name="password">
-        <input class="reg-input" type="text" placeholder="Підтвердіть пароль" name="confirm password">
+        <input class="reg-input" type="email" placeholder="Електронна адреса" name="email">
+        <input id="pass" class="reg-input" type="password" placeholder="Пароль" name="password">
+        <input class="reg-input" type="password" placeholder="Підтвердіть пароль" name="confirm password">
         <div class="submit">
             <button class="sign-up"> Зареєструватись </button>
             <a href="{% url 'login' %}" class="have">В мене вже є акаунт</a>

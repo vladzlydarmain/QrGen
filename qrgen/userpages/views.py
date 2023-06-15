@@ -14,6 +14,7 @@ def check_code(request):
 
 # Create your views here.
 def show_profile(request):
+
     context = {
         "user":{"email":None, "name":None,"plan_info":None,"user_info":None},
         "code":f"{check_code(request)}"
@@ -30,8 +31,10 @@ def show_profile(request):
                 user.plan = plan
                 user.save()
                 request.session["code"] = ' '
-            else:
+            elif form["password"] != '' and form["confirm password"] != '':
                 request.session["code"] = "Паролі не співпадають або пароль не вірний"
+            else:
+                request.session["code"] = ' '
             return redirect("profile")
 
     if request.method == "GET":
@@ -59,6 +62,13 @@ def show_all_qr(request):
 
     username = request.user
     user = UserMod.objects.get(user=User.objects.get(username=username))
+
+    if request.method == "POST":
+        qrpk = request.POST["delete-pk"]
+        qr = QrCode.objects.get(pk = qrpk)
+        user.qr_amount -= 1
+        user.save()
+        qr.delete()
     
     context = {
         "qr_list": QrCode.objects.filter(user = user)

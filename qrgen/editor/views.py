@@ -14,7 +14,6 @@ from .models import QrCode, UserImage, LittleImage
 import PIL
 from PIL import Image, ImageDraw
 
-
 def form_check(form):
     if form == "SquareModuleDrawer()":
         form = SquareModuleDrawer()
@@ -56,6 +55,9 @@ def show_editor(request):
 
     if request.method == "GET" and not request.user.is_authenticated:
         return redirect("login")
+
+    if UserMod.objects.get(user=User.objects.get(username=request.user)).plan.plantype == "Free":
+        return redirect("main")
         
     if request.method == "POST":    
 
@@ -114,7 +116,8 @@ def show_editor(request):
         
         if "load_file_little" in request.FILES:
             little_img.delete()
-
+        user.qr_amount += 1
+        user.save()
         context["url"] = final_qr
         
     respones = render(request, "editor/editor.html", context)

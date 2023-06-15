@@ -1,62 +1,66 @@
 {% extends "base/base.html" %}
 
 {% block content %}
+
+<div class="wrapper-end"></div>
+
 <div class="main">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'userpages/profil.css' %}">
+    <link rel="stylesheet" href="{% static 'userpages/profile1.css' %}">
     <div class="profile-p1">
         <div>
-            <p>{{ user.name }}</p>
-            <p>{{ user.email }}</p>
+            <p>Ім'я: {{ user.name }}</p>
+            <p>Email: {{ user.email }}</p>
         </div>
         <form action="" method="post">
             {% csrf_token %}
             <input class="l-out" type="text" name="button" value="log out" hidden>
-            <button class="log-out">Вийти з акаунта</button>
+            <button class="log-out log-out-new">Вийти з акаунта</button>
         </form>
     </div>
-    <div class="p-info">
-        <h1> Інформація про план </h1> 
-    </div>
-<div class="part3">
-    
-    <div class="plan">
-        <div class="upper">
-            <p class="type">{{ user.plan_info.plantype }}</p>
-            <p class="price">{{ user.plan_info.price }}$/month</p>
-            <p class="last-payment"> Остання оплата: {{ user.user_info.last_payment }}</p>
-        </div>
-        <div class="lower">
-            <div class="dynamic">
-                <div class="value">{{ user.plan_info.qrcode_amount }}</div>
-                <p>Динамічні QR-коди</p>
+    <div class="part3">
+        <div class="plan">
+            <div class="upper">
+                <p class="type">{{ user.plan_info.plantype }}</p>
+                <p class="price">{{ user.plan_info.price }}$/month</p>
+                <p class="last-payment"> Остання оплата: {{ user.user_info.last_payment }}</p>
             </div>
-            <div class="dynamic">
-                <div class="value">
-                    {% if user.plan_info.scans == -1.0 %}
-                    ∞
-                    {% else %}
-                        {{ user.plan_info.scans }}
-                    {% endif %}
+            <div class="lower">
+                <div class="dynamic">
+                    <div class="value">{{ user.user_info.qr_amount }}/{{ user.plan_info.qrcode_amount }}</div>
+                    <p>Динамічні QR-коди</p>
                 </div>
-                <p>Кількість сканувань</p>
+                <div class="dynamic">
+                    <div class="value">
+                        {% if user.plan_info.scans == -1.0 %}
+                        ∞
+                        {% else %}
+                            {{ user.plan_info.scans }}
+                        {% endif %}
+                    </div>
+                    <p>Кількість сканувань</p>
+                </div>
             </div>
         </div>
+        <div class="cancel">
+            <form action="" method="POST" class="end-up-form">
+                {% csrf_token %}
+                <input class="log-input" type="text" placeholder="Пароль" name="password">
+                <input class="log-input" type="text" placeholder="Підтвердіть пароль" name="confirm password">
+                <input class="end-s" type="text" name="button" value="endplan" hidden>
+                <label for="" class="end-subscribe" onclick="openModal()"><img class="left" src="{% static 'userpages\images\Screenshot_22.png' %}" alt="levaya tipa">Закінчити план<img class="right" src="{% static 'userpages/images/Screenshot_2.png' %}" alt="pravaya tipa"></label>
+                <div class="modal">
+                    <h1>Ви впевнені ?</h1>
+                    <p>Після того як ви натиснете кнопку "Так" дія вашого тарифу одразу </p>
+                    <div style="display: flex; flex-direction: row; gap: 5px;">
+                        <input type="reset" class = "button-no button" value="Ні"> 
+                        <input type="submit" class = "button" value="Так">
+                    </div>
+                </div>
+            </form>
+            <p style="color: azure; font-size: 20px;">{{ code }}</p>
+        </div> 
     </div>
-    <div class="cancel">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input class="log-input" type="text" placeholder="Пароль" name="password">
-            <input class="log-input" type="text" placeholder="Підтвердіть пароль" name="confirm password">
-            <input class="end-s" type="text" name="button" value="endplan" hidden>
-            <button class="end-subscribe"><img class="left" src="{% static 'userpages\images\Screenshot_22.png' %}" alt="levaya tipa">Закінчити план<img class="right" src="{% static 'userpages/images/Screenshot_2.png' %}" alt="pravaya tipa"></button>
-        </form>
-        <p style="color: azure; font-size: 20px;">{{ code }}</p>
-    </div> 
-</div>
-
-
-
-    
+    <script src="{% static 'userpages/modal.js' %}" defer></script>
 </div>
 {% endblock %}

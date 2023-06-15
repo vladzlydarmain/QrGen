@@ -22,3 +22,6 @@ class QrCode(models.Model):
     def addQr(qrcode_path, user,url,user_img=UserImage.objects.get(pk = 1),little_user_img=LittleImage.objects.get(pk = 1)):
         qr = QrCode.objects.create(user=user,image=qrcode_path,url = url,user_img=user_img,little_user_img=little_user_img)    
         return  qr
+    def delete(self, *args, **kwargs): 
+        self.image.delete() 
+        super().delete(*args, **kwargs)

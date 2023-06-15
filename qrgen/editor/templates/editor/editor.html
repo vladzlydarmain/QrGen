@@ -2,8 +2,8 @@
 
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'editor/editor_cool.css' %}">
-<script src="{% static 'js/script.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'editor/editor.css' %}">
+<script src="{% static 'js/script_editorA.js' %}" defer></script>
 <input id="url" value="{% url 'editor' %}" hidden>
 <div class="generator">
     <div class="gen_header">
@@ -13,41 +13,45 @@
         {% csrf_token %}
         <div class="left">
             <input type="text" name = "buttontype" value="img" hidden>
-            <input class="url-input" type="text" name="qr_url" placeholder="Посилання">
+            <input class="url-input" type="url" name="qr_url" placeholder="Посилання">
+
+            <div class="set_extension">
+                <input class="jpg" value="jpg" type="radio" name="extention" checked>
+                <label for=".jpg">jpg</label>
             
-            <div class="load_image_div">
-                <label for=".photo-url">Центральне зображення</label> 
-                <input class="photo-url" name="load_file_little" type="file" accept=".jpeg, .jpg, .png">
+                <input class="png" value="png" type="radio" name="extention">
+                <label for=".png">png</label>
+            
+                <input class="tiff" value="tiff" type="radio" name="extention">
+                <label for=".tiff">tiff</label>          
             </div>
+
             <div class="gradiant-choose-div">
-                <p>Градієнт QR-коду</p>
-                <div class="colors">    
-                    <input type="color" name="second_color" id="second">
-                    <label for=".second">Зовнішній колір</label>
+                <p  class="text">Градієнт QR-коду</p>
+                <div class="colors" hidden>    
+                    <input type="color" name="second_color" id="second" hidden>
+                    <label for=".second" class="text" id="second" hidden>Зовнішній колір</label>
                 </div>
+                <input name="load_file" class="load_file-inp photo-url" type="file" accept=".tiff, .jpg, .png" hidden>    
                 <select name="gradiant_form" id="gradiant-select">
-                    <option class = "change_button" id="SolidFill" name="gradiant_form" value="SolidFillColorMask()" checked>Без градієнту</option>
-                    <Option class = "change_button" id="RadialGradiant" name="gradiant_form" value="RadialGradiantColorMask()">Радіальний градієнт</Option>
-                    <Option class = "change_button" id="SquareGradiant" name="gradiant_form" value="SquareGradiantColorMask()">Квадратний градієнт</Option>
-                    <Option class = "change_button" id="VerticalGradiant" name="gradiant_form" value="VerticalGradiantColorMask()">Вертикальний градієнт</Option>
-                    <Option class = "change_button" id="HorizontalGradiant" name="gradiant_form" value="HorizontalGradiantColorMask()">Горизонтальний градієнт</Option>
-                    <Option class = "change_button" id="ImageGradiant" name="gradiant_form" value="ImageColorMask()">Зображення</Option>
+                    <option class="grad_option" id="SolidFill" name="gradiant_form" value="SolidFillColorMask()" checked>Без градієнту</option>
+                    <Option id="RadialGradiant" name="gradiant_form" value="RadialGradiantColorMask()">Радіальний градієнт</Option>
+                    <Option id="SquareGradiant" name="gradiant_form" value="SquareGradiantColorMask()">Квадратний градієнт</Option>
+                    <Option id="VerticalGradiant" name="gradiant_form" value="VerticalGradiantColorMask()">Вертикальний градієнт</Option>
+                    <Option id="HorizontalGradiant" name="gradiant_form" value="HorizontalGradiantColorMask()">Горизонтальний градієнт</Option>
+                    <Option id="ImageGradiant" name="gradiant_form" value="ImageColorMask()">Зображення</Option>
                 </select>
-                <input name="load_file" type="file" accept=".jpeg, .jpg, .png">    
             </div>
+
+            <div class="load_image_div">
+                <label for=".photo-url" class="text">Центральне зображення</label> 
+                <input class="photo-url" name="load_file_little" type="file" accept=".tiff, .jpg, .png">
+            </div>
+        
+
             <div class="for-buttons">
-                    <button class="create" type="submit">Створити</button>
-                <div>
-                    <input class="jpg" value="jpg" type="radio" name="extention" checked>
-                    <label for=".jpg">jpg</label>
-                
-                    <input class="png" value="png" type="radio" name="extention">
-                    <label for=".png">png</label>
-                
-                    <input class="jpeg" value="jpeg" type="radio" name="extention">
-                    <label for=".jpeg">jpeg</label>
-                </div>
-                <a name="download" href="{{ url.image.url }}" filename="{{ url.image.name }}" download="extention">Завантажити</a>
+                <button class="create" type="submit">Створити</button>
+                <a name="download" href="{{ url.image.url }}" filename="{{ url.image.name }}" download="extention" class="download-a" hidden><button class="download-button create" type="button">Завантажити</button></a>
             </div>
         </div>  
         <div class="right">
@@ -55,35 +59,60 @@
 
             <div class="right-settings-div">
                 <div class="main-colors-div">
-                    <label for="bg_color">Колір фону</label>
-                    <input class="bg_color" type="color" value="white" name="back_color" id="back">
-                    <label for=".first">Колір блоків</label>
+                    <label for="bg_color"  class="text">Колір фону</label>
+                    <input class="bg_color" type="color" value="#ffffff" name="back_color" id="back">
+                    <label for=".first"  class="text">Колір блоків</label>
                     <input type="color" name="first_color" id="first">
                 </div>
+                <p>Форма блоків QR-коду</p>
                 <div class="block-choose-div">
-                    <p>Форму блоків QR-коду</p>
-                    <input type = "radio" class = "change_button" id="normal_block" name="block_form" value="SquareModuleDrawer()" checked>
-                    <label for="#normal_block">Звичайна</label>
-                    <input type = "radio" class = "change_button" id="circle_block" name="block_form" value="CircleModuleDrawer()">
-                    <label for="#circle_block">Коло</label>
-                    <input type = "radio" class = "change_button" id="gapped_block" name="block_form" value="GappedSquareModuleDrawer()">
-                    <label for="#gapped_block">З проміжком</label>
-                    <input type = "radio" class = "change_button" id="round_block" name="block_form" value="RoundedModuleDrawer()">
-                    <label for="#round_block">Закруглений</label>
-                    <input type = "radio" class = "change_button" id="vertical_block" name = "block_form" value="VerticalBarsDrawer()">
-                    <label for="#vertical_block">Вертикальний</label>
-                    <input type = "radio" class = "change_button" id="horizontal_block" name = "block_form" value="HorizontalBarsDrawer()">
-                    <label for="#horizontal">Горизонтальний</label>
+                    <div class="cool_class ">
+                        <input type = "radio" class = "change_button" id="normal_block" name="block_form" value="SquareModuleDrawer()" checked hidden>
+                        <label for="#normal_block">
+                            <img class="change_img first_choose" src="{% static 'editor/image/default.png' %}" alt="Звичайна">
+                        </label>
+                    </div>
+                    <div class="cool_class">
+                        <input type = "radio" class = "change_button" id="circle_block" name="block_form" value="CircleModuleDrawer()" hidden>
+                        <label for="#circle_block">
+                            <img class="change_img" src="{% static 'editor/image/circle.png' %}" alt="Коло">
+                        </label>                        
+                    </div>
+                    <div class="cool_class">
+                        <input type = "radio" class = "change_button" id="gapped_block" name="block_form" value="GappedSquareModuleDrawer()" hidden>
+                        <label for="#gapped_block">
+                            <img class="change_img" src="{% static 'editor/image/gapped.png' %}" alt="З проміжком">
+                        </label>          
+                    </div>
+                    <div class="cool_class">
+                        <input type = "radio" class = "change_button" id="round_block" name="block_form" value="RoundedModuleDrawer()" hidden>
+                        <label for="#round_block">
+                            <img class="change_img" src="{% static 'editor/image/rounded.png' %}" alt="Закруглений">
+                        </label>                        
+                    </div>
+                    <div class="cool_class">
+                        <input type = "radio" class = "change_button" id="vertical_block" name = "block_form" value="VerticalBarsDrawer()" hidden>
+                        <label for="#vertical_block">
+                            <img class="change_img" src="{% static 'editor/image/vertical.png' %}" alt="Вертикальний">
+                        </label>                        
+                    </div>
+                    <div class="cool_class">
+                        <input type = "radio" class = "change_button" id="horizontal_block" name = "block_form" value="HorizontalBarsDrawer()" hidden>
+                        <label for="#horizontal">
+                            <img class="change_img" src="{% static 'editor/image/horizontal.png' %}" alt="Горизонтальний">
+                        </label>                        
+                    </div>
                 </div>
             </div>
         </div>        
         <!-- <img src="image/templateqr.png" alt="QRcode"> -->
 
     </form>
+    <!-- <a name="download" href="{{ url.image.url }}" filename="{{ url.image.name }}" download="extention"><button>Завантажити</button></a> -->
     
     <!-- <form action="{% url 'editor' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input name="load_file" type="file" accept=".jpeg, .jpg, .png">
+        <input name="load_file" type="file" accept=".tiff, .jpg, .png">
         <input type="submit" value="Upload">
     </form> -->
 </div>

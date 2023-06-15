@@ -14,5 +14,6 @@ class UserMod(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE)
     plan = models.ForeignKey(Plan, on_delete = models.CASCADE) 
     last_payment = models.CharField(max_length=255)
-    qr_scans = 0
+    qr_scans = models.IntegerField()
+    qr_amount = models.IntegerField()
     
