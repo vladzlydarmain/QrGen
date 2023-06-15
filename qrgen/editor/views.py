@@ -1,6 +1,7 @@
 from qrgen.settings import MEDIA_URL, BASE_DIR
 from .generate_qr import *
 from userpages.models import *
+from userpages.views import check_code
 # import mimetypes
 from pathlib import *
 from django.shortcuts import render, redirect
@@ -50,17 +51,27 @@ def hex_to_rgb(hex):
 
 def show_editor(request):
     context = {
-        "url":None
+        "url":None,
+        "code":check_code(request,'editor'),
     }
 
-    if request.method == "GET" and not request.user.is_authenticated:
+    if not request.user.is_authenticated:
         return redirect("login")
 
-    if UserMod.objects.get(user=User.objects.get(username=request.user)).plan.plantype == "Free":
+    user = UserMod.objects.get(user=User.objects.get(username=request.user))
+
+    if user.qr_amount <= user.plan.qrcode_amount:
+        request.session["code_editor"] = ' '
+
+    if user.plan.plantype == "Free":
         return redirect("main")
         
     if request.method == "POST":    
 
+        if user.qr_amount >= user.plan.qrcode_amount:
+            request.session["code_editor"] = 'У вас перевищено ліміт Qr-кодів, будь ласка видаліть деякі із них для того щоб продовжити користуватися нашим сервісом'
+            return render(request, "editor/editor.html", context)
+            
         qr_var = request.POST
         back = qr_var["back_color"][1:]#tip uberau hashteg
         first = qr_var["first_color"][1:]

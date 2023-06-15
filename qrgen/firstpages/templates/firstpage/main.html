@@ -19,16 +19,6 @@
                             <div class="value">{{ plan.qrcode_amount }}</div>
                             <p>Динамічні QR-коди</p>
                         </div>
-                        <div class="dynamic">
-                            <div class="value">
-                                {% if plan.scans == -1.0 %}
-                                    ∞
-                                {% else %}
-                                    {{plan.scans}}
-                                {% endif %}
-                            </div>
-                            <p>Кількість сканувань</p>
-                        </div>
                     </div>
                 </form>
             {% endif %}

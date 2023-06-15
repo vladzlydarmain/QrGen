@@ -22,6 +22,7 @@
         <div class="plan">
             <div class="upper">
                 <p class="type">{{ user.plan_info.plantype }}</p>
+                <input class="aboba" type="text" value="{{ user.plan_info.plantype }}" hidden>
                 <p class="price">{{ user.plan_info.price }}$/month</p>
                 <p class="last-payment"> Остання оплата: {{ user.user_info.last_payment }}</p>
             </div>
@@ -30,31 +31,21 @@
                     <div class="value">{{ user.user_info.qr_amount }}/{{ user.plan_info.qrcode_amount }}</div>
                     <p>Динамічні QR-коди</p>
                 </div>
-                <div class="dynamic">
-                    <div class="value">
-                        {% if user.plan_info.scans == -1.0 %}
-                        ∞
-                        {% else %}
-                            {{ user.plan_info.scans }}
-                        {% endif %}
-                    </div>
-                    <p>Кількість сканувань</p>
-                </div>
             </div>
         </div>
         <div class="cancel">
             <form action="" method="POST" class="end-up-form">
                 {% csrf_token %}
-                <input class="log-input" type="text" placeholder="Пароль" name="password">
-                <input class="log-input" type="text" placeholder="Підтвердіть пароль" name="confirm password">
+                <input class="log-input" type="password" placeholder="Пароль" name="password">
+                <input class="log-input" type="password" placeholder="Підтвердіть пароль" name="confirm password">
                 <input class="end-s" type="text" name="button" value="endplan" hidden>
-                <label for="" class="end-subscribe" onclick="openModal()"><img class="left" src="{% static 'userpages\images\Screenshot_22.png' %}" alt="levaya tipa">Закінчити план<img class="right" src="{% static 'userpages/images/Screenshot_2.png' %}" alt="pravaya tipa"></label>
+                <label for="" class="end-subscribe" onclick="openModal()">Закінчити план</label>
                 <div class="modal">
                     <h1>Ви впевнені ?</h1>
-                    <p>Після того як ви натиснете кнопку "Так" дія вашого тарифу одразу </p>
+                    <p >Після того як ви натиснете кнопку "Так" дія вашого тарифу одразу закінчиться</p>
                     <div style="display: flex; flex-direction: row; gap: 5px;">
                         <input type="reset" class = "button-no button" value="Ні"> 
-                        <input type="submit" class = "button" value="Так">
+                        <input type="submit" class = "button button-yes" value="Так">
                     </div>
                 </div>
             </form>
@@ -62,5 +53,7 @@
         </div> 
     </div>
     <script src="{% static 'userpages/modal.js' %}" defer></script>
+    <script src="{% static 'userpages/free.js' %}" defer></script>
+    <!-- <script src="{% static 'userpages/dark.js' %}" defer></script> -->
 </div>
 {% endblock %}

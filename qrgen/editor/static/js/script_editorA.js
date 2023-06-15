@@ -1,16 +1,3 @@
-// var image = new Image(); 
-// // важно добавить обработчик события до инициализации загрузки картинки
-// image.onload = function(){
-//    $('#img-tag')
-//       .css({'opacity':0, 'display':'none'})
-//       .attr('src', this.src)
-//       .fadeIn();
-// }
-// i.src = "{{ url.image.url }}"; // существующее изображение
-
-
-// let radioButton = document.querySelectorAll(".change_button")
-
 let radioImg = document.querySelectorAll(".change_img");
 let radioButtons = document.querySelectorAll(".change_button");
 let divs = document.querySelectorAll(".cool_class");

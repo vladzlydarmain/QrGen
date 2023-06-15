@@ -73,7 +73,6 @@
     gap: 10px;
     height: 82px;
     width: 100%;
-    justify-content: space-between;
     /* padding: 0px 10px 0px 10px; */
     font-style: normal;
     border-radius: 20px;
@@ -81,7 +80,8 @@
     font-weight: 700;
     font-size: 36px;
     line-height: 45px;
-    color: #8C0000;
+    align-items: center;
+    color: #ffffff;
     border: 4px solid #8C0000;
     font-weight: 800;
     transition: 700ms;
@@ -90,11 +90,11 @@
 
 .end-subscribe:hover{
     background-color: rgb(49, 0, 0);
-    color: #ff0000;
+    color: #FF7A33;
 }
 
 .end-subscribe:active{
-    border: 4px #ff0000 solid;
+    border: 4px #FF7A33 solid;
 }
 
 .end-subscribe:hover + .wrapper-end{

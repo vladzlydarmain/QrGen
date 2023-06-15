@@ -6,18 +6,19 @@ from userpages.models import Plan, UserMod
 from django.shortcuts import get_object_or_404
 import datetime
 
-def check_code(request):
-    if 'code' in request.session:
-        return request.session["code"]
+def check_code(request, application):
+    if f'code_{application}' in request.session:
+        exception = f"code_{application}"
+        print(request.session[exception])
+        return request.session[exception]
     else:
         return " "
 
 # Create your views here.
 def show_profile(request):
-
     context = {
         "user":{"email":None, "name":None,"plan_info":None,"user_info":None},
-        "code":f"{check_code(request)}"
+        "code":check_code(request,'profile'),
     }
     if request.method == "POST":
         if request.POST["button"] == "log out":
@@ -30,11 +31,12 @@ def show_profile(request):
                 plan = Plan.objects.get(plantype="Free")
                 user.plan = plan
                 user.save()
-                request.session["code"] = ' '
-            elif form["password"] != '' and form["confirm password"] != '':
-                request.session["code"] = "Паролі не співпадають або пароль не вірний"
+                request.session["code_profile"] = ' '
+            elif (form['password'] != [''] or form['confirm password'] != ['']) or form["password"] != form["confirm password"]:
+                request.session["code_profile"] = "Паролі не співпадають або пароль не вірний"
             else:
-                request.session["code"] = ' '
+                print(form)
+                request.session["code_profile"] = ' '
             return redirect("profile")
 
     if request.method == "GET":
@@ -112,13 +114,14 @@ def show_redirect_page(request, qr_pk):
     date = datetime.date.today()
     if (user_last_payment.month < date.month and date.day == user_last_payment.day and user_last_payment.year <= date.year) or (user_last_payment.month < date.month and date.day > user_last_payment.day) or (user_last_payment.year < date.year):
         return render(request, "userpages/redirect.html", context={
-            "code":"Your payment was overdue"
+            "code":"Термін дії вашого плану закінчився. Будь ласка здійсніть оплату для подальшого використовування нашого сервісу"
         })#проверка на просрочку даты
-
-    if user.qr_scans >= userplan.scans and userplan.scans != -1:
+    
+    if user.qr_amount >= user.plan.qrcode_amount:
         return render(request, "userpages/redirect.html", context={
-            "code":"Your amount of scans have been exceeded, please buy new scans on our site"
-        })#проверка на просрочку сканов
+            "code":"У вас перевищено ліміт Qr-кодів, будь ласка видаліть деякі із них для того щоб продовжити користуватися нашим сервісом"
+        })
+
     user.qr_scans += 1
     user.save()
     return redirect(qrobj.url)

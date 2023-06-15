@@ -26,7 +26,7 @@ def show_main(request):
 
 def show_reg(request):
     context = {
-        "error_text":f"{check_code(request)}"
+        "error_text":f"{check_code(request,'reg')}"
     }
     if request.method == "GET" and request.user.is_authenticated:
         return redirect("profile")
@@ -38,13 +38,13 @@ def show_reg(request):
         email = request.POST.get("email")
         
         if user_name == '':
-            request.session["code"] = "Ім'я не може бути порожнім!"
+            request.session["code_reg"] = "Ім'я не може бути порожнім!"
             return redirect("reg")
         if len(password) < 6:
-            request.session["code"] = "Пароль має бути не менше 6 символів!"
+            request.session["code_reg"] = "Пароль має бути не менше 6 символів!"
             return redirect("reg")
         if password != confirm_password:
-            request.session["code"] = "Паролі не співпадають!"
+            request.session["code_reg"] = "Паролі не співпадають!"
             return redirect("reg")
         try:
             UserMod.objects.create(user = User.objects.create_user(username = user_name, password = password, email = email), plan=Plan.objects.get(plantype="Free"), last_payment="-",qr_scans=0,qr_amount=0)

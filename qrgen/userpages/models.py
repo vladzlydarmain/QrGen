@@ -8,7 +8,6 @@ class Plan(models.Model):
     price = models.FloatField()
     plantype = models.CharField(max_length=255)
     qrcode_amount = models.IntegerField()
-    scans = models.IntegerField()
 
 class UserMod(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE)
