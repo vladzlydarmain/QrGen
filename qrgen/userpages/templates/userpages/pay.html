@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<p class="payment-text" >Деталі оплати</p>
 <div class="payment-div">
     {% load static %}
 
@@ -9,7 +10,6 @@
     <form method="post">
         {% csrf_token %}
         <div class="payment-inputs-div">
-            <p class="payment-text" >Деталі оплати</p>
             <div class="input-pay">
                 <label for=".name">Ім'я:</label>
                 <input class="name pay-input" type="text" placeholder="Oleksyi Ostapchenko">
@@ -26,7 +26,7 @@
                 <label for=".valid-till">Дійсна до:</label>
                 <input class="valid-till pay-input" type="text" placeholder="09/26">
             </div>
-            <button name="plantype" value = "{{ plan_info.plantype }}" class="submit">Submit</button>
+            <button name="plantype" value = "{{ plan_info.plantype }}" class="submit">ОТРИМАТИ</button>
         </div>
     </form>
     <div class="plan">
@@ -39,16 +39,6 @@
             <div class="dynamic">
                 <div class="value">{{ plan_info.qrcode_amount }}</div>
                 <p>Динамічні QR-коди</p>
-            </div>
-            <div class="dynamic">
-                <div class="value">
-                    {% if plan_info.scans == -1.0 %}
-                        ∞
-                    {% else %}
-                        {{plan_info.scans}}
-                    {% endif %}
-                </div>
-                <p>Кількість сканувань</p>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
     padding: 0px;
     margin: 0px;
     text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -78,15 +79,6 @@ header{
     border-radius: 30px;
 }
 
-/* .qr-gen-a img{
-    position: relative;
-    transform: translateY(11px);
-}
-
-.view-all-a img{
-    position: relative;
-    transform: translateY(11px);
-} */
 
 .hint{
     position: absolute;

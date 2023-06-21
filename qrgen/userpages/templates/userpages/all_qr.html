@@ -13,12 +13,16 @@
     {% for qr in  qr_list %}
     <div class="qr-div">
         <img class="qr-img" src="{{ qr.image.url }}" alt="here must be picture">
-        <div class="qr-url-div">
-            <p class="qr-url">{{ qr.url }}</p>
+        <div class="qr-url-div" title="{{ qr.url }}">
+            <a class="qr-url url-for-js" href="{{ qr.url }}" target="_blank">{{ qr.url|truncatechars:40 }}</a>
+            <p class="qr-url qr-text" style="display: none">here is no information</p>
         </div>
         <!-- <input type="text" class="delete-pk" name="delete" value="{{ qr.pk }}" hidden> -->
         <div style="display: flex; flex-direction: row; gap: 5px;">
-            <button class="delete" value="{{ qr.pk }}">Видалити</button>
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class="delete" value="{{ qr.pk }}" name="delete-pk">Видалити</button>
+            </form>
             <a href="{{ qr.image.url }}" download><button class="download-button">Завантажити</button></a>
         </div>
     </div>

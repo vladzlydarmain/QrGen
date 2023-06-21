@@ -6,7 +6,7 @@
     padding: 10px;
     gap: 10px;
 
-    margin-top: 100px;
+    margin-top: 5%;
     background: rgba(0, 20, 51, 0.6);
     backdrop-filter: blur(10px);
     /* Note: backdrop-filter has minimal browser support */
@@ -121,8 +121,8 @@
     align-items: center;
     padding: 10px 30px;
     gap: 30px;
-    width: 95%;
-    height: 139px;
+    width: 93%;
+    height: 30%;
     background: #002766;
     border-radius: 30px;
     font-size: 32px;
@@ -164,7 +164,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    gap: 100px;
+    gap: 50px;
     
 }
 
@@ -243,4 +243,38 @@ h1{
 .button-no:active{
     border-color: white;
     background-color: rgb(59, 160, 110);
+}
+
+@media (max-width: 550px){
+    .profile-p1{
+        font-size: 16px;
+        flex-direction: column;
+        max-width: 290px;
+        height: auto;
+    }
+    .part3{
+        flex-direction: column;
+    }
+    .log-input{
+        padding: 20px 0px 20px 20px;
+    }
+    .log-input::placeholder{
+        font-size: 24px;
+    }
+    .end-subscribe{
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 1200px){
+    .profile-p1{
+        font-size: 26px;
+        width: auto;
+        height: auto;
+    }
+    .log-out-new{
+        line-height: 20px;
+        font-size: 20px;
+    }
+    
 }

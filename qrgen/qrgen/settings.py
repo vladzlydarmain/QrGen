@@ -26,6 +26,19 @@ SECRET_KEY = 'django-insecure-+4m97_+qn0yzs3vq_^5v(jacgue9vkb_%h7r#rp0z#hi=o5z)n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# EMAIL_HOST = 'smtp.gmail.com'
+# # хост от лица которого мы отправляем сообщения
+
+# # почта от лица которого мы отправляем сообщения
+
+# # доступ к отправке 
+# EMAIL_PORT = 587
+# # порт
+# EMAIL_USE_TLS = True
+# # протокол защити (по типу ssh)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 ALLOWED_HOSTS = []
 
 
@@ -129,3 +142,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CHAT_ID = -934685539
+BOT_TOKEN = ''

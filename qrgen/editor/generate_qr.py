@@ -6,84 +6,116 @@ from qrcode.image.styles.colormasks import *
 import PIL
 from PIL import Image, ImageDraw
 
-#---------------important----------------
-def style_inner_eyes(img):
+
+def style_inner_eyes(img, form="square", inner_color = (0,0,0), bg_col = (255,255,255)):
   img_size = img.size[0]
-  eye_size = 70 #default
+  eye_size = 120 #default 
   quiet_zone = 40 #default
-  mask = Image.new('L', img.size, 0)
-  draw = ImageDraw.Draw(mask)
-  draw.rectangle((60, 60, 90, 90), fill=255) #top left eye
-  draw.rectangle((img_size-90, 60, img_size-60, 90), fill=255) #top right eye
-  draw.rectangle((60, img_size-90, 90, img_size-60), fill=255) #bottom left eye
-  return mask
+  draw = ImageDraw.Draw(img)
+  if form == "square":
+    draw.rectangle((75, 75, 145, 145), fill=inner_color) #top left eye
+    draw.rectangle((img_size-145, 75, img_size-75, 145), fill=inner_color) #top right eye
+    draw.rectangle((75, img_size-145, 145, img_size-75), fill=inner_color) #bottom left eye
+  if form == "rounded":
+    draw.rounded_rectangle((75, 75, 145, 145), fill=inner_color, radius=15) #top left eye
+    draw.rounded_rectangle((img_size-145, 75, img_size-75, 145), fill=inner_color, radius=15) #top right eye
+    draw.rounded_rectangle((75, img_size-145, 145, img_size-75), fill=inner_color, radius=15) #bottom left eye
+  if form == "circle":
+    draw.ellipse((75, 75, 145, 145), fill=inner_color) #top left eye
+    draw.ellipse((img_size-145, 75, img_size-75, 145), fill=inner_color) #top right eye
+    draw.ellipse((75, img_size-145, 145, img_size-75), fill=inner_color) #bottom left eye
+  return img
 
-def style_outer_eyes(img):
+def style_outer_eyes(img, form="square", outer_col = (0,0,0), bg_col = (255,255,255)):
   img_size = img.size[0]
-  eye_size = 70 #default
+  eye_size = 140 #default 
   quiet_zone = 40 #default
-  mask = Image.new('L', img.size, 0)
-  draw = ImageDraw.Draw(mask)
-  draw.rectangle((40, 40, 110, 110), fill=255) #top left eye
-  draw.rectangle((img_size-110, 40, img_size-40, 110), fill=255) #top right eye
-  draw.rectangle((40, img_size-110, 110, img_size-40), fill=255) #bottom left eye
-  draw.rectangle((60, 60, 90, 90), fill=0) #top left eye
-  draw.rectangle((img_size-90, 60, img_size-60, 90), fill=0) #top right eye
-  draw.rectangle((60, img_size-90, 90, img_size-60), fill=0) #bottom left eye  
-  return mask
-#---------------important----------------
+  draw = ImageDraw.Draw(img)
+  if form == "square":
+    draw.rectangle((40, 40, 180, 180), fill=outer_col) #top left eye
+    draw.rectangle((img_size-180, 40, img_size-40, 180), fill=outer_col) #top right eye
+    draw.rectangle((40, img_size-180, 180, img_size-40), fill=outer_col) #bottom left eye
+    draw.rectangle((60, 60, 160, 160), fill=bg_col) #top left eye
+    draw.rectangle((img_size-160, 60, img_size-60, 160), fill=bg_col) #top right eye
+    draw.rectangle((60, img_size-160, 160, img_size-60), fill=bg_col) #bottom left eye  
+  if form == "rounded":
+    draw.rounded_rectangle((40, 40, 180, 180), fill=outer_col, radius=40) #top left eye
+    draw.rounded_rectangle((img_size-180, 40, img_size-40, 180), fill=outer_col, radius=40) #top right eye
+    draw.rounded_rectangle((40, img_size-180, 180, img_size-40), fill=outer_col, radius=40) #bottom left eye
+    draw.rounded_rectangle((60, 60, 160, 160), fill=bg_col, radius=40) #top left eye
+    draw.rounded_rectangle((img_size-160, 60, img_size-60, 160), fill=bg_col, radius=40) #top right eye
+    draw.rounded_rectangle((60, img_size-160, 160, img_size-60), fill=bg_col, radius=40) #bottom left eye  
+  if form == "circle":
+    draw.ellipse((40, 40, 180, 180), fill=outer_col) #top left eye
+    draw.ellipse((img_size-180, 40, img_size-40, 180), fill=outer_col) #top right eye
+    draw.ellipse((40, img_size-180, 180, img_size-40), fill=outer_col) #bottom left eye
+    draw.ellipse((60, 60, 160, 160),  fill= bg_col) #top left eye
+    draw.ellipse((img_size-160, 60, img_size-60, 160),  fill= bg_col) #top right eye
+    draw.ellipse((60, img_size-160, 160, img_size-60),  fill= bg_col) #bottom left eye
 
-# cool_img = Image.open("231.jpg")
-# size = (300,300)
-# cool_img = cool_img.resize(size)
-# cool_img.save("test.jpg")
+  return img
 
-def make_qr(qr_data, bor_len=2, vers= 1, image_center = None, black_form = SquareModuleDrawer(), gradient = SolidFillColorMask((255, 255, 255),(0,0,0))):
-  if image_center == None:
-    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, version=vers, box_size=20, border= bor_len)
-    qr.add_data(qr_data)
-    img = qr.make_image(image_factory=StyledPilImage, module_drawer=black_form, color_mask=gradient)  
-    return img
-  else:
-    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, version=vers, box_size=20, border= bor_len)
-    qr.add_data(qr_data)
-    img = qr.make_image(image_factory=StyledPilImage, module_drawer=black_form, color_mask=gradient, embeded_image_path=image_center)  
-    return img
-
+def no_eyes_rect(img, bg_col = (255,255,255)):
+  img_size = img.size[0]
+  eye_size = 140 #default 
+  quiet_zone = 40 #default
+  draw = ImageDraw.Draw(img)
+  draw.rectangle((0, 0, 180, 180), fill=bg_col) #top left eye
+  draw.rectangle((img_size-180, 0, img_size, 180), fill=bg_col) #top right eye
+  draw.rectangle((0, img_size-180, 180, img_size), fill=bg_col) #bottom left eye
+  draw.rectangle((0, 0, img_size, 39), bg_col)
+  draw.rectangle((0, 0, 39, img_size), bg_col)
+  draw.rectangle((img_size-39, 0, img_size, img_size), bg_col)
+  draw.rectangle((0, img_size-39, 180, img_size), bg_col) 
+  draw.line((40, img_size-181, 180, img_size-181), fill=bg_col, width=2)
+  draw.line((img_size-181, 40, img_size-181, 180), fill=bg_col, width=2)
+  return img
 
 if not hasattr(PIL.Image, 'Resampling'):
   PIL.Image.Resampling = PIL.Image
-# Now PIL.Image.Resampling.BICUBIC is always recognized.
+
+def make_qr(qr_data, 
+            bor_len=2, 
+            vers= 1, 
+            image_center = None, 
+            black_form = SquareModuleDrawer(), 
+            gradient = SolidFillColorMask((0,0,0),(255, 255, 255)), 
+            bg_color = (255,255,255),
+            inner_color = (0,0,0), 
+            outer_color = (0,0,0),
+            real_inner_eye_form = "square",
+            real_outer_eye_form = "square",
+            eye_add = 0):
+  qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, version=vers, box_size=20, border= bor_len)
 
 
-qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+  if eye_add == 1:
+    if image_center == None:
+      img = qr.make_image(image_factory=StyledPilImage, module_drawer=black_form, color_mask=gradient)  
+    else:
+      img = qr.make_image(image_factory=StyledPilImage, module_drawer=black_form, color_mask=gradient, embeded_image_path=image_center) 
+    
+    no_eye_img = no_eyes_rect(img, bg_color) 
+    outer_img = style_outer_eyes(no_eye_img, real_outer_eye_form, outer_color, bg_color)
+    inner_img = style_inner_eyes(outer_img, real_inner_eye_form, inner_color, bg_color)
+    final_image = inner_img
+    return final_image
+  else:
+    if image_center == None:
+      img = qr.make_image(image_factory=StyledPilImage, module_drawer=black_form, color_mask=gradient)  
+    else:
+      img = qr.make_image(image_factory=StyledPilImage, module_drawer=black_form, color_mask=gradient, embeded_image_path=image_center)  
+    return img
 
-qr.add_data('http://www.medium.com')
+# qr_img = make_qr(qr_data="Utochka: krya krya", 
+#                  black_form = RoundedModuleDrawer(), #форма кубиков
+#                  gradient = SolidFillColorMask((255,255,255),(0,0,0)),
+#                  real_inner_eye_form = "circle",
+#                  real_outer_eye_form = "rounded",
+#                  bg_color = (255,255,255),
+#                  inner_color = (0,0,0), 
+#                  outer_color = (0,0,0),
+#                  eye_add = 1
+#                 )
 
-qr_inner_eyes_img = qr.make_image(image_factory=StyledPilImage,
-                            eye_drawer=RoundedModuleDrawer(radius_ratio=1.2),
-                            color_mask=SolidFillColorMask(back_color=(255, 255, 255), front_color=(63, 42, 86)))
-
-qr_outer_eyes_img = qr.make_image(image_factory=StyledPilImage,
-                            eye_drawer=VerticalBarsDrawer(),
-                            color_mask=SolidFillColorMask(front_color=(255, 128, 0)))                            
-
-qr_img = qr.make_image(image_factory=StyledPilImage,
-                       module_drawer=SquareModuleDrawer())
-
-inner_eye_mask = style_inner_eyes(qr_img)
-outer_eye_mask = style_outer_eyes(qr_img)
-intermediate_img = Image.composite(qr_inner_eyes_img, qr_img, inner_eye_mask)
-final_image = Image.composite(qr_outer_eyes_img, intermediate_img, outer_eye_mask)
-final_image.save('final_image.png')
-
-# cool_qr = make_qr("Utochka: krya krya", #инфа
-#                   2,#растояние от бордера
-#                   3,#версия
-#                   "231.jpg",#закоменть и фотки не будет
-#                   RoundedModuleDrawer(), #форма кубиков
-#                   ImageColorMask(color_mask_image=cool_img)
-#                   )#  #градиент, если убрать будет обычный
-
-# cool_qr.save('userqr.png')
-
+# qr_img.save('userqr9092.png')

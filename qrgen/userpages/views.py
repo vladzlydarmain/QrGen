@@ -5,6 +5,8 @@ from editor.models import QrCode
 from userpages.models import Plan, UserMod
 from django.shortcuts import get_object_or_404
 import datetime
+from .bot import send_message_to_telegram
+from qrgen.settings import CHAT_ID, BOT_TOKEN
 
 def check_code(request, application):
     if f'code_{application}' in request.session:
@@ -35,7 +37,6 @@ def show_profile(request):
             elif (form['password'] != [''] or form['confirm password'] != ['']) or form["password"] != form["confirm password"]:
                 request.session["code_profile"] = "Паролі не співпадають або пароль не вірний"
             else:
-                print(form)
                 request.session["code_profile"] = ' '
             return redirect("profile")
 
@@ -44,6 +45,7 @@ def show_profile(request):
             name = request.user
             email = request.user.email
             userinfo = UserMod.objects.get(user=User.objects.get(username = name))
+            userinfo.qr_amount = len(QrCode.objects.filter(user = userinfo))
             plan = userinfo.plan
             context["user"]["name"] = name
             context["user"]["email"] = email
@@ -64,11 +66,11 @@ def show_all_qr(request):
 
     username = request.user
     user = UserMod.objects.get(user=User.objects.get(username=username))
-
+    user.qr_amount = len(QrCode.objects.filter(user = user))
     if request.method == "POST":
         qrpk = request.POST["delete-pk"]
         qr = QrCode.objects.get(pk = qrpk)
-        user.qr_amount -= 1
+        user.qr_amount = len(QrCode.objects.filter(user = user))
         user.save()
         qr.delete()
     
@@ -101,6 +103,8 @@ def show_pay(request):
             userobj.plan = plan
             userobj.qr_scans = 0
             userobj.save()
+            message = f'Користувач: {user}\nОформив тариф: {plan.plantype}\nЗа ціною: {plan.price}$/на місяць.'
+            send_message_to_telegram(BOT_TOKEN,CHAT_ID,message)
             return redirect("profile")
     
     response = render(request, "userpages/pay.html", context = context)

@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
-body{
-    font-family: 'Lexend', sans-serif;
-}
 .plan{
     display: flex;
     flex-direction: column;
@@ -9,8 +6,8 @@ body{
     padding: 0px 30px;
     gap: 4px;
 
-    width: 313px;
-    height: 366px;
+    /* width: 313px; */
+    /* height: 366px; */
 
     background: #FFBD99;
     border-radius: 30px;
@@ -22,8 +19,8 @@ body{
     align-items: center;
     padding: 28px 0px;
     gap: 12px;
-    width: 239px;
-    height: 250px;
+    /* width: 239px;
+    height: 250px; */
     border-bottom: 2px solid;
     border-color: #CC4700;
 }
@@ -83,8 +80,8 @@ body{
     padding: 18px 40px;
     gap: 5px;
 
-    width: 253px;
-    height: 112px;
+    /* width: 253px;
+    height: 112px; */
 }
 .dynamic{
     display: flex;
@@ -120,8 +117,8 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
-    padding: 20px 40px;
+    margin-top: 10%;
+    padding: 2% 3%;
     gap: 43px;
 
     /* width: 724px; */
@@ -145,6 +142,8 @@ body{
     color: #FF9C66;
 
 }
+
+
 .log-label{
     font-weight: 700;
     font-size: 36px;
@@ -161,11 +160,11 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 25px;
+    padding: 20px;
     gap: 10px;
     border: none;
-    width: 650px;
-    height: 73px;
+    width: 97%;
+    height: 3%;
     color: #000000;
     font-weight: 400;
     font-size: 30px;
@@ -193,12 +192,13 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 25px;
+    padding: 20px;
     gap: 10px;
-
-    width: 644px;
-    height: 73px;
     border: none;
+    width: 97%;
+    height: 3%;
+    color: #000000;
+    font-weight: 400;
     font-size: 30px;
     line-height: 45px;
 
@@ -223,7 +223,7 @@ body{
     padding: 0px 40px 0px 33px;
     gap: 10px;
 
-    width: 658px;
+    width: 100%;
     height: 75px;
 }
 .log-in{
@@ -258,8 +258,8 @@ body{
 
     /* font-family: 'Lexend'; */
     font-style: normal;
-    opacity: 70%;
-    font-weight: 500;
+    /* opacity: 70%; */
+    font-weight: 600;
     font-size: 32px;
     line-height: 40px;
     color: white;
@@ -280,7 +280,6 @@ body{
 
     /* width: 232px;
     height: 80px; */
-
     background: rgba(255, 156, 102, 0.6);
     border-radius: 30px;
     border: none;
@@ -297,12 +296,11 @@ body{
 
 .have{
     height: 40px;
-
     /* article 32 bold */
 
     /* font-family: 'Lexend'; */
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 32px;
     line-height: 40px;
     /* identical to box height */
@@ -312,19 +310,7 @@ body{
     text-decoration: none;
 }
 
- /* .profile:hover::after {
-    position: absolute;
-    content: attr(data-tooltip);
-    left: 561px;
-    top: 60px;
-    right: 50px;
-    height: 50px;
-    width: 25px;
-    background: none;
-    transform: translateX(-50%);
-    color: palegreen;
 
-}  */
 
 .log-out{
     border: none;
@@ -349,5 +335,75 @@ body{
 
     background: rgba(0, 39, 102, 0.6);
     border-radius: 30px;
-    }
+}
 
+.menu{
+    display: flex;
+    flex-direction: column; 
+    padding: 0px 50px 50px 50px;
+    height: auto;
+}
+
+.cards{
+    flex-direction: row; 
+    gap: 10px;
+    display: flex;
+}
+
+@media (max-width: 550px){
+    .submit{
+        padding: 0px 0px 0px 20px;
+    }
+    .container{
+        margin-right: 5%;
+        margin-left: 5%;
+        gap: 15px;
+        /* margin: 0px 20px 0 0; */
+    }
+    .reg-label{
+        font-size: 24px;
+    }
+    .sign-up{
+        line-height: 30px;
+        padding: 10px 5px 10px 5px;
+        font-size: 16px;
+    }
+    .have{
+        font-size: 14px;
+        padding-bottom: 25px;
+    }
+    .reg-input{
+        padding: 10px 0 10px 20px;
+    }
+    .reg-input::placeholder{
+        font-size: 16px;
+    }
+    .log-input{
+        padding: 10px 0 10px 20px;
+    }
+    .log-in{
+        line-height: 30px;
+        font-size: 30px;
+    }
+    .dont-have{
+        font-size: 14px;
+    }
+    .cards{
+        flex-direction: column;
+    }
+}
+@media (max-width:831px){
+    .menu{
+        flex-direction: column;
+        padding: 10px;
+    }
+    body{
+        gap: 0px;
+    }
+    .submit{
+        padding: 0px 0px 0px 20px;
+    }
+    .have{
+        font-size: 16px;
+    }
+}

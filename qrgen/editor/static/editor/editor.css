@@ -1,3 +1,11 @@
+.generator-div-option-left{
+    padding: 10px 20px;
+    gap: 10px;    
+    background: rgba(51, 129, 255, 0.4);
+    border-radius: 27px;
+    width: 70%;
+}
+
 .block-choose-div{
     display: flex;
     justify-content: start;
@@ -82,8 +90,9 @@
     padding: 0 10px;
     border-radius: 5px;
     font-size: 20px;
-    width: fit-content;
-    transition: 300ms;
+    width: 85%;
+    max-width: 450px;
+    transition: all 300ms ease-in-out;
 }
 
 #gradiant-select option{
@@ -115,6 +124,7 @@
     border: none;
     color: #FFFFFF;
     background: rgba(51, 129, 255, 0.4);
+    transition: all 300ms ease-in-out;
 }
 
 .url-input:focus{
@@ -141,18 +151,15 @@
     border: 4px #ff5b03 solid;
     border-radius: 10px;
     font-size: 18px;
-    /* background: rgb(255, 124, 53); */
-    width: 80%;
+
+    width: 75%;
     max-width: 450px;
     transition: 300ms;
 }
 .photo-url:hover{
     background: #0062FF;
 }
-/* .photo-url:hover, .photo-url::-webkit-file-upload-button{
-    background: #0062FF;
-    border: 4px #ffffff solid;
-} */
+
 .photo-url:active{
     border:  4px #ffffff solid;
 }
@@ -203,6 +210,12 @@
     border-radius: 30px;
 }
 
+.gif-load{
+    width: 300px;
+    border: none; 
+    border-radius: 30px;
+}
+
 .create_form{
     display: flex;
     flex-direction: row;
@@ -221,7 +234,7 @@
     padding: 20px 0 20px 0;
     gap: 20px;
     overflow-y: scroll;
-    /* border: 4px #ac460f solid; */
+
     border-radius: 5px;
 }
 
@@ -234,7 +247,7 @@
 }
 .left::-webkit-scrollbar-thumb{
     background: #0062FF;
-    /* background: none; */
+
     width: 5px;
     border-radius: 5px;
 }
@@ -283,9 +296,23 @@
     gap: 5px;
 }
 
-.change_img{
+.form_change_img{
     width: 45px;
-    border: 2px solid #0062FF;
+    border: 3px solid #0062FF;
+    border-radius: 15px;
+    transition: 300ms;
+}
+
+.inner-change_img{
+    width: 45px;
+    border: 3px solid #0062FF;
+    border-radius: 15px;
+    transition: 300ms;
+}
+
+.outer-change_img{
+    width: 45px;
+    border: 3px solid #0062FF;
     border-radius: 15px;
     transition: 300ms;
 }
@@ -297,12 +324,20 @@
     width: 70% ;
     border-radius: 30px;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
     border: none;
     color: #FFFFFF;
     background: rgba(51, 129, 255, 0.4);
+}
+
+.with-ext-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 input[type="color"]{
@@ -320,7 +355,6 @@ input[type="color"]:active{
     border: 4px #0062FF solid;
     border-left: none;
     border-radius: 0px 30px 30px 0px;
-    /* font-size: x-large; */
 }
 
 .download-button:hover{
@@ -351,4 +385,187 @@ input[type="color"]:active{
     border-radius: 10px;
     border: 4px #FF7A33 solid;
     transition: 300ms;
+}
+
+.eye-settings-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    transition: all 300ms ease-in-out;
+}
+
+.eye-settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+.eye-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border: 4px #CC4700 solid;
+    border-radius: 30px;
+    gap: 5px;
+}
+
+.eye-form-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.eye-color-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.eye-color-div label{
+    font-size: 18px;
+}
+
+
+.eye-button{
+    padding: 10px 20px;
+    background: none;
+    border-radius: 15px;
+    transition: ease-in-out 300ms; 
+}
+.eye-button:active{
+    border:4px #ffffff solid;
+}
+
+.add-eye-button{
+    border: 4px #ff5b03 solid;
+}
+.add-eye-button:hover{
+    background: #993600;
+}
+.delete-eye-button{
+    border: 4px #0062FF solid;
+}
+.delete-eye-button:hover{
+    background: #0243ac;
+}
+
+.pay-etension{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    word-wrap: normal;
+    background: #ca0d0d;
+    border-radius: 30px;
+    border: 4px #ffffff dotted;
+    width: 70%;
+    max-width: 450px;
+    padding: 10px 20px;
+}
+.pay-etension p{
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.with-media-create{
+    border-radius: 30px 0px 0px 30px; 
+    border-right:none
+}
+
+@media (max-width: 550px){
+    
+    .gen_header{
+        border-radius: 15px;
+    }
+
+    #img-tag{
+        width: 200px;
+        height: 200px;
+    }
+    .gif-load{
+        width: 200px;
+        height: 200px;  
+    }
+    .img-div{
+        width: 200px;
+        height: 200px;    
+    }
+    .for-buttons{
+        flex-direction: column;
+    }  
+    .with-media-create{
+        border-radius: 30px; 
+        border-style: solid;
+        border-color: #CC4700;
+    }
+    .download-for-mobile{
+        border-radius: 30px; 
+        border-style: solid;
+        border-color: #0062FF;
+    }
+}
+@media (max-width:831px){
+
+    body{
+        height: fit-content;
+    }
+
+    .create_form{
+        flex-direction: column;
+        height: fit-content;
+        width: 90%;
+    }
+
+    .left{
+        width: 100%;
+        height: fit-content;
+        padding: 20px 0 20px 0;
+        gap: 20px;
+        overflow-y: none;
+    }
+
+    .right{
+        width: 100%;
+        height: fit-content;
+    }
+
+    .generator{
+        height: fit-content;
+        padding: 10px;
+        width: 90%;
+    }
+
+    .extension-div label{
+        font-size: 15px;
+    }
+
+    .create{
+        padding: 15px 30px;
+        gap: 10px;
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .download-button{
+        padding: 15px 30px;
+        gap: 10px;
+        font-size: 28px;
+        line-height: 32px;
+    }
+    .eye-div{
+        width: 95%;
+    }
+    .pay-etension{
+        width: 95%;
+    }
 }
