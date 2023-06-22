@@ -133,7 +133,7 @@ def show_editor(request):
   
 
         if not os.path.exists(MEDIA_URL+f"{name}"):
-            os.mkdir(MEDIA_URL+f"{name}")
+            os.mkdir(path = MEDIA_URL+f"{name}")
 
         final_qr = QrCode.addQr(user = user, url= new_url, qrcode_path = None)
         if add_eye_val == "no_eye":

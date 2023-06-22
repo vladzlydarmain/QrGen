@@ -87,7 +87,7 @@ def make_qr(qr_data,
             real_outer_eye_form = "square",
             eye_add = 0):
   qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H, version=vers, box_size=20, border= bor_len)
-
+  qr.add_data(qr_data)
 
   if eye_add == 1:
     if image_center == None:
